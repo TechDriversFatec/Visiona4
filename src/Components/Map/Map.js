@@ -1,8 +1,12 @@
 import React from 'react'
-import { Map, TileLayer } from "react-leaflet";
+import { Map, TileLayer, FeatureGroup, Polygon } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { EditControl } from "react-leaflet-draw";
+import 'leaflet-draw/dist/leaflet.draw.css';
 
 const baseUrlTileLayer = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
+
+
 
 const Mapa = () => (
   <Map
@@ -13,6 +17,23 @@ const Mapa = () => (
     minZoom={5}
   >
     <TileLayer url={baseUrlTileLayer} />
+    <FeatureGroup>
+      <EditControl
+        position="bottomright"
+
+        onCreated={e => {console.log(e)}}
+        draw={{
+                  marker: false,
+                  circle: false,
+                  rectangle: false,
+                  polygon: true,
+                  polyline: false,
+                  circlemarker: false
+              }}
+      />
+      ;
+    </FeatureGroup>
+
   </Map>
   )
 
