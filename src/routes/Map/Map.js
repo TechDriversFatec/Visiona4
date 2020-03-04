@@ -5,7 +5,7 @@ import Header from '../../Components/Header/Header'
 import MapComponent from '../../Components/Map/Map'
 
 const Map = () => (
-  <div>
+  <div style={{height:'100vh', width:'100vw', position:'relative'}}>
     <Header title="Header" />
     <MapComponent />
     <Footer title="Footer" />
