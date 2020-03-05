@@ -3,7 +3,7 @@ import { Map, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import './Map.scss'
 
-const baseUrlTileLayer = "http://{s}.tile.osm.org/{z}/{x}/{y}.png";
+const baseUrlTileLayer = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
 
 const Mapa = () => (
   <Map
