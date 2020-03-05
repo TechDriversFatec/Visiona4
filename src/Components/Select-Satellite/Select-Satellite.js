@@ -1,9 +1,12 @@
 import React from 'react'
 import { Select } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { updateSatelliteType } from '../../action'
+
+import IconSatellite from '../../icon/satellite2.png'
+
 import 'semantic-ui-css/semantic.min.css'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import {updateSatelliteType} from '../../action'
 import './Select-Satellite.scss'
 
 
@@ -25,12 +28,12 @@ function SelectSatellite (props) {
 
   function SatelliteType(e, {value}) {
     updateSatelliteType(value)
-
   }
 
   return(
-    <div>
-      <span className="type-satellite">Selecione o tipo de Satélite</span>
+    <div className="select-satellite">
+      <span className="type-satellite">Selecione o tipo de Satélite:</span>
+      <img src={IconSatellite} alt="icon" className="icon-satellite" />
       <Select
         placeholder='Selecione um satélite'
         options={satelliteOptions}

@@ -5,8 +5,13 @@
   color: black;
   display: flex;
   height: 100px;
-  // justify-content: center;
+  justify-content: space-around;
   width: 100%;
   height: 10%;
   z-index: 997;
+
+  .title{
+    color: #707070;
+    margin: 0;
+  }
 }

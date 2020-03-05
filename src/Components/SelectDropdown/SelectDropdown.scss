@@ -1,0 +1,15 @@
+.select-place {
+  display: flex;
+  align-items: center;
+
+  .go-to{
+    color: #707070;
+    font-size: 18px;
+    margin-right: 15px;
+  }
+
+  .icon-place {
+    width: 35px;
+    margin-right: 15px;
+  }
+}

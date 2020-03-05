@@ -3,10 +3,10 @@ import SelectSatellite from '../Select-Satellite/Select-Satellite'
 import {SelectDropdown} from '../SelectDropdown'
 import './Header.scss'
 
-const Header = (props) => (
+const Header = () => (
   <div className="header">
+    <h1 className="title">Talhões</h1>
     <SelectSatellite />
-    {props.title}
     <SelectDropdown />
   </div>
 )

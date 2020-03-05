@@ -4,6 +4,10 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {updateCoords} from '../../action'
 
+import IconPlace from '../../icon/place.png'
+
+import "./SelectDropdown.scss"
+
 const COORD_REGEX = /^(-?\d+(\.\d+)?),( ?)(-?\d+(\.\d+)?)$/;
 
 /**
@@ -70,12 +74,16 @@ const SelectDropdown = (props) => {
   }
 
   return (
-    <div>
+    <div className="select-place">
+      <span className="go-to">Vá para um lugar:</span>
+      <img src={IconPlace} alt="icone" className="icon-place" />
       <Search
         loading={loading}
         results={results}
         onSearchChange={(e, { value }) => search(value)}
         onResultSelect={selectResult}
+        placeholder="Digite um lugar"
+
       />
     </div>
   );
