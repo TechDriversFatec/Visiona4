@@ -1,15 +1,16 @@
 import React from 'react'
 import { Map, TileLayer, WMSTileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import './Map.scss'
 
 const baseUrlTileLayer = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
 const baseUrlWmsTileLayer = "https://services.sentinel-hub.com/ogc/wms/2dcbdfd8-a497-42d8-8a13-c4887489d077"
 
 const Mapa = (props) => (
   <Map
-    style={{ height: "100vh",width: "100%" }}
+    style={{ height: "80%", width: "100vw" }}
     zoom={7}
-    center={[-15.5597331,-53.8948822]}
+    center={["-15.5597331", "-53.8948822"]}
     maxZoom={15}
     minZoom={5}
   >
@@ -26,7 +27,5 @@ const Mapa = (props) => (
     />
     <div />
   </Map>
-  )
-
-
-export default Mapa
+);
+export default Mapa;
