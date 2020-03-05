@@ -1,6 +1,9 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { Select } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {updateSatelliteType} from '../../action'
 import './Select-Satellite.scss'
 
 
@@ -17,21 +20,29 @@ const satelliteOptions = [
   }
 ]
 
-function SatelliteType(e, {value}) {
-  const satellite = value;
-  console.log(satellite)
-  return satellite
-}
+function SelectSatellite (props) {
+  const {updateSatelliteType} = props
 
-function SelectSatellite () {
+  function SatelliteType(e, {value}) {
+    updateSatelliteType(value)
+
+  }
+
   return(
     <div>
       <span className="type-satellite">Selecione o tipo de Satélite</span>
-      <Select placeholder='Selecione um satélite' options={satelliteOptions} onChange={SatelliteType}  />
+      <Select
+        placeholder='Selecione um satélite'
+        options={satelliteOptions}
+        onChange={SatelliteType}
+      />
     </div>
   )
 }
 
+const storeToProps = store => ({
+  satellite_type: store.satelliteTypeState.satellite_type
+})
+const dispatchToProps = dispatch => bindActionCreators({updateSatelliteType}, dispatch)
 
-
-export default SelectSatellite
+export default connect(storeToProps, dispatchToProps)(SelectSatellite)
