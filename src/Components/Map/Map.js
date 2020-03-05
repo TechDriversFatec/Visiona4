@@ -6,7 +6,10 @@ import 'leaflet-draw/dist/leaflet.draw.css';
 
 const baseUrlTileLayer = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
 
-
+const getLatlon = (param) => {
+  const coordinates =  param
+  console.log(coordinates);
+}
 
 const Mapa = () => (
   <Map
@@ -21,7 +24,8 @@ const Mapa = () => (
       <EditControl
         position="bottomright"
 
-        onCreated={e => {console.log(e)}}
+        onCreated={e => {getLatlon(e.layer._latlngs)}}
+
         draw={{
                   marker: false,
                   circle: false,
@@ -36,6 +40,5 @@ const Mapa = () => (
 
   </Map>
   )
-
 
 export default Mapa
