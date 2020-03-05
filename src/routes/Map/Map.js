@@ -7,7 +7,7 @@ import MapComponent from '../../Components/Map/Map'
 const Map = () => (
   <div>
     <Header title="Header" />
-    <MapComponent />
+    <MapComponent typeSatellite="sentinel" />
     <Footer title="Footer" />
   </div>
 )
