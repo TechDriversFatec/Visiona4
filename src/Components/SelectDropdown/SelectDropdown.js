@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Search } from "semantic-ui-react";
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {updateCoords} from '../../action'
 
 const COORD_REGEX = /^(-?\d+(\.\d+)?),( ?)(-?\d+(\.\d+)?)$/;
 
@@ -40,9 +43,11 @@ function getPLaceList(response = []) {
     });
 }
 
-const SelectDropdown = () => {
+const SelectDropdown = (props) => {
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState([]);
+
+  const {updateCoords} = props
   /**
    * @param {string} value
    */
@@ -59,7 +64,10 @@ const SelectDropdown = () => {
   }
 
   /** @TODO implement this */
-  function selectResult(e, { result }) {}
+  function selectResult(e, { result }) {
+    updateCoords(result.value)
+
+  }
 
   return (
     <div>
@@ -73,4 +81,12 @@ const SelectDropdown = () => {
   );
 };
 
-export default SelectDropdown;
+const mapStateToProps = store =>({
+  coord:{
+    lat:store.positionState.lat,
+    lon:store.positionState.lon
+  }
+})
+const mapDispatchToProps = dispatch => bindActionCreators({updateCoords}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectDropdown);

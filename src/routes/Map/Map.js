@@ -7,7 +7,7 @@ import MapComponent from '../../Components/Map/Map'
 const Map = () => (
   <div style={{height:'100vh', width:'100vw', position:'relative'}}>
     <Header title="Header" />
-    <MapComponent typeSatellite="sentinel" />
+    <MapComponent typeSatellite="" />
     <Footer title="Footer" />
   </div>
 )
