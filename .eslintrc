@@ -10,6 +10,7 @@
   "plugins": ["react", "prettier"],
   "env": { "browser": true, "jest": true },
   "rules": {
+    "no-shadow":"off",
     "max-len": ["error", { "code": 100 }],
     "prefer-promise-reject-errors": ["off"],
     "react/jsx-filename-extension": ["off"],
