@@ -1,13 +1,20 @@
 /* eslint-disable max-len */
 import React from 'react'
-import { Map, TileLayer } from "react-leaflet";
+import { Map, TileLayer, FeatureGroup} from "react-leaflet";
+import { EditControl } from "react-leaflet-draw";
 import {connect} from 'react-redux'
 import SentinelWMS from '../SentinelWMS'
+import 'leaflet-draw/dist/leaflet.draw.css';
 import "leaflet/dist/leaflet.css";
 import './Map.scss'
 
+
 const baseUrlTileLayer = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
 
+const getLatlon = (param) => {
+  const coordinates =  param
+  console.log(coordinates);
+}
 
 const getWms = (type) => {
   if(type === 'sentinel'){
@@ -30,10 +37,28 @@ const Mapa = (props) => {
       {
         typeSatellite?getWms(typeSatellite):null
       }
-      <div />
+      <FeatureGroup>
+        <EditControl
+          position="bottomright"
+
+          // eslint-disable-next-line no-underscore-dangle
+          onCreated={e => {getLatlon(e.layer._latlngs)}}
+          draw={{
+            marker: false,
+            circle: false,
+            rectangle: false,
+            polygon: true,
+            polyline: false,
+            circlemarker: false
+          }}
+        />
+        ;
+      </FeatureGroup>
     </Map>
   )
 };
+
+
 const mapStateToProps = store =>({
   coord:{
     lat:store.positionState.lat,
