@@ -13,7 +13,8 @@ const baseUrlTileLayer = "https://server.arcgisonline.com/ArcGIS/rest/services/W
 
 const getLatlon = (param) => {
   const coordinates =  param
-  console.log(coordinates);
+  const coords = coordinates[0].map(val=>`${val.lat.toFixed(6)} ${val.lng.toFixed(6)}`).join(',')
+  console.log(coords)
 }
 
 const getWms = (type) => {
@@ -30,7 +31,7 @@ const Mapa = (props) => {
       style={{ height: "80%", width: "100vw" }}
       zoom={7}
       center={[coord.lat, coord.lon]}
-      maxZoom={15}
+      // maxZoom={15}
       minZoom={5}
     >
       <TileLayer url={baseUrlTileLayer} />

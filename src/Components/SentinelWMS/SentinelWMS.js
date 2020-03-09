@@ -7,8 +7,8 @@ const baseUrlWmsTileLayer =
 const SentinelWMS = ()=>(
   <WMSTileLayer
     url={baseUrlWmsTileLayer}
-    layers="AGRICULTURE"
-    preset="AGRICULTURE"
+    layers="TRUE_COLOR"
+    preset="TRUE_COLOR"
     maxcc="20"
     time="2020-02-25"
     maxCloudCoverage="100"
