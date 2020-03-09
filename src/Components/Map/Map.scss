@@ -1,9 +1,5 @@
 .leaflet-left .leaflet-control {
-  position: fixed;
-  right: 10px !important;
-  align-items: center;
-  margin: 0;
-  top: 80%;
+  position: relative;
 }
 
 .map {
