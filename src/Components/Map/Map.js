@@ -1,8 +1,13 @@
+/* eslint-disable max-len */
 import React from 'react'
-import { Map, TileLayer, FeatureGroup, Polygon } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+import { Map, TileLayer, FeatureGroup} from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
+import {connect} from 'react-redux'
+import SentinelWMS from '../SentinelWMS'
 import 'leaflet-draw/dist/leaflet.draw.css';
+import "leaflet/dist/leaflet.css";
+import './Map.scss'
+
 
 const baseUrlTileLayer = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
 
@@ -11,34 +16,53 @@ const getLatlon = (param) => {
   console.log(coordinates);
 }
 
-const Mapa = () => (
-  <Map
-    style={{ height: "100vh",width: "100%" }}
-    zoom={7}
-    center={[-15.5597331,-53.8948822]}
-    maxZoom={15}
-    minZoom={5}
-  >
-    <TileLayer url={baseUrlTileLayer} />
-    <FeatureGroup>
-      <EditControl
-        position="bottomright"
+const getWms = (type) => {
+  if(type === 'sentinel'){
+    return SentinelWMS()
+  }
+  return null
+}
 
-        onCreated={e => {getLatlon(e.layer._latlngs)}}
+const Mapa = (props) => {
+  const {coord, typeSatellite} = props
+  return (
+    <Map
+      style={{ height: "80%", width: "100vw" }}
+      zoom={7}
+      center={[coord.lat, coord.lon]}
+      maxZoom={15}
+      minZoom={5}
+    >
+      <TileLayer url={baseUrlTileLayer} />
+      {
+        typeSatellite?getWms(typeSatellite):null
+      }
+      <FeatureGroup>
+        <EditControl
+          position="bottomright"
 
-        draw={{
-                  marker: false,
-                  circle: false,
-                  rectangle: false,
-                  polygon: true,
-                  polyline: false,
-                  circlemarker: false
-              }}
-      />
-      ;
-    </FeatureGroup>
-
-  </Map>
+          // eslint-disable-next-line no-underscore-dangle
+          onCreated={e => {getLatlon(e.layer._latlngs)}}
+          draw={{
+            marker: false,
+            circle: false,
+            rectangle: false,
+            polygon: true,
+            polyline: false,
+            circlemarker: false
+          }}
+        />
+        ;
+      </FeatureGroup>
+    </Map>
   )
+};
 
-export default Mapa
+
+const mapStateToProps = store =>({
+  coord:{
+    lat:store.positionState.lat,
+    lon:store.positionState.lon
+  }
+})
+export default connect(mapStateToProps)(Mapa);
