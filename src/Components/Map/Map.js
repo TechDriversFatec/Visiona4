@@ -17,15 +17,16 @@ const getLatlon = (param) => {
   console.log(coords)
 }
 
-const getWms = (type) => {
-  if(type === 'sentinel'){
-    return SentinelWMS()
-  }
-  return null
-}
 
 const Mapa = (props) => {
   const {coord, typeSatellite} = props
+  const getWms = (type) => {
+    if(type === 'sentinel'){
+      return SentinelWMS(props.cloudValue)
+    }
+    return null
+  }
+
   return (
     <Map
       style={{ height: "80%", width: "100vw" }}

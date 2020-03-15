@@ -1,9 +1,11 @@
 import React from 'react'
+
+import CloudCoverage from '../CloudCoverage/CloudCoverage'
 import './Footer.scss'
 
-const Footer = (props) => (
+const Footer = () => (
   <div className="footer">
-    {props.title}
+    <CloudCoverage />
   </div>
 )
 
