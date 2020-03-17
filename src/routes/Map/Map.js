@@ -8,9 +8,9 @@ const Map = (props) => {
   const {satelliteType, cloudValue} = props
   return (
     <div style={{height:'100vh', width:'100vw', position:'relative'}}>
-      <Header title="Header" />
+      <Header />
       <MapComponent typeSatellite={satelliteType} cloudValue={cloudValue} />
-      <Footer title="Footer" />
+      <Footer />
     </div>
   )
 }

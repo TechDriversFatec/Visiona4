@@ -40,7 +40,7 @@ const Mapa = props => {
       style={{ height: "80%", width: "100vw" }}
       zoom={7}
       center={[coord.lat, coord.lon]}
-      // maxZoom={15}
+      maxZoom={17}
       minZoom={5}
       ref={mapRef}
     >
