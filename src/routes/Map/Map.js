@@ -5,19 +5,19 @@ import Header from '../../Components/Header/Header'
 import MapComponent from '../../Components/Map/Map'
 
 const Map = (props) => {
-  const {satelliteType} = props
+  const {satelliteType, cloudValue} = props
   return (
     <div style={{height:'100vh', width:'100vw', position:'relative'}}>
       <Header title="Header" />
-      <MapComponent typeSatellite={satelliteType} />
+      <MapComponent typeSatellite={satelliteType} cloudValue={cloudValue} />
       <Footer title="Footer" />
     </div>
-
   )
 }
 
 const storeToProp = store => ({
-  satelliteType: store.satelliteTypeState.satellite_type
+  satelliteType: store.satelliteTypeState.satellite_type,
+  cloudValue: store.cloudState.cloud_value
 })
 
 export default connect(storeToProp)(Map)

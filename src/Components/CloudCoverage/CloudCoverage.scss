@@ -1,0 +1,18 @@
+.cloud-coverage-container {
+  align-items: center;
+  display: flex;
+
+  .percent-value {
+    color: #707070;
+  }
+
+  .icon-cloud {
+    margin: 0 15px 0 15px;
+    width: 35px;
+    height: 35px;
+  }
+
+  .slider {
+    width: 300px;
+  }
+}

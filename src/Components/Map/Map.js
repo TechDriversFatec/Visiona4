@@ -28,7 +28,7 @@ const Mapa = props => {
   const geoJSONRef = useRef(null)
   const { coord, typeSatellite, geoJSON } = props;
   const updateGeoJSON = ()=>{
-    if(!mapRef.current || !geoJSONRef.current) return
+    if(!mapRef.current || !geoJSONRef.current ||!geoJSON) return
     const map = mapRef.current.leafletElement
     const gJSON = geoJSONRef.current.leafletElement
     gJSON.addData(geoJSON)
