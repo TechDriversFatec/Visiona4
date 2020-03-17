@@ -1,3 +1,9 @@
+# Plataforma de Detecção de Talhões
+
+## Equipe
+Bruno Henrique, Iago Cardial, Matheus Vilela, Mayra Bernardes, Willyan Antunes;
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
