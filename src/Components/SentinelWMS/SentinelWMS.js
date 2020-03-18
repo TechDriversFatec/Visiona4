@@ -12,8 +12,6 @@ const SentinelWMS = (props)=> {
       preset="TRUE_COLOR"
       maxcc={props}
       time="2020-02-25"
-      // maxCloudCoverage={props}
-      // srs="EPSG:4326"
       format="image/png"
     />
   )

@@ -32,7 +32,7 @@ function CloudCoverage (props) {
       <span className="percent-value">{value} %</span>
       <img src={IconCloud} alt="icone" className="icon-cloud" />
       <div className="slider">
-        <Slider value={value} color="inverted-blue" settings={settings} />
+        <Slider color="inverted-blue" settings={settings} />
       </div>
     </div>
   )
