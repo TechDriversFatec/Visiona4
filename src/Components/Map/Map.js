@@ -17,16 +17,10 @@ const getLatlon = param => {
   console.log(coords);
 };
 
-const getWms = type => {
-  if (type === "sentinel") {
-    return SentinelWMS();
-  }
-  return null;
-};
 const Mapa = props => {
+  const { coord, typeSatellite, geoJSON } = props;
   const mapRef = useRef(null)
   const geoJSONRef = useRef(null)
-  const { coord, typeSatellite, geoJSON } = props;
   const updateGeoJSON = ()=>{
     if(!mapRef.current || !geoJSONRef.current ||!geoJSON) return
     const map = mapRef.current.leafletElement
@@ -34,6 +28,14 @@ const Mapa = props => {
     gJSON.addData(geoJSON)
     map.fitBounds(gJSON.getBounds())
   }
+
+  const getWms = type => {
+    if (type === "sentinel") {
+      return SentinelWMS(props.cloudValue);
+    }
+    return null;
+  };
+
   updateGeoJSON()
   return (
     <Map
