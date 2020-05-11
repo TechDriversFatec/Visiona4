@@ -1,8 +1,10 @@
 import React from 'react'
 import {WMSTileLayer} from 'react-leaflet'
 
+const key = process.env.REACT_APP_KEY_API_SENTINEL;
+
 const baseUrlWmsTileLayer =
-  "https://services.sentinel-hub.com/ogc/wms/2dcbdfd8-a497-42d8-8a13-c4887489d077"
+  `https://services.sentinel-hub.com/ogc/wms/${key}`
 
 const SentinelWMS = (props)=> {
   return(
