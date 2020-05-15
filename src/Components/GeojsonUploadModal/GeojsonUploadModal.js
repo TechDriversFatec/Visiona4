@@ -29,10 +29,6 @@ const activeStyle = {
   borderColor: "#2196f3",
 };
 
-const acceptStyle = {
-  borderColor: "#00e676",
-};
-
 const rejectStyle = {
   borderColor: "#ff1744",
 };
@@ -71,16 +67,16 @@ const GeojsonUploadModal = props => {
     if (validateGeojson(json)) setGeojson(json);
   };
 
-  const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({
     accept: ".json,application/json,.geojson",
     multiple: false,
     onDrop: getGeoJson,
   });
+
   const style = useMemo(
     () => ({
       ...baseStyle,
       ...(isDragActive ? activeStyle : {}),
-      ...(isDragAccept ? acceptStyle : {}),
       ...(isDragReject ? rejectStyle : {}),
     }),
     [isDragActive, isDragReject]
