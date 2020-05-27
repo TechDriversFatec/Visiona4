@@ -1,17 +1,28 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import "./aoiModal.scss"
 import { Modal, Icon, Button, Image} from "semantic-ui-react";
 
 const AOImodal = (props) => {
-  const setVisible = props.visible
-  const [open, setOpen] = useState(setVisible);
-  const [close, setClose] = useState(setVisible(false));
-  console.log('asdasd', setVisible)
+  const [open, setOpen] = useState(false)
+  
+  const close = () => setOpen(false)
+
+  const openModal = () => {
+    setOpen(true)
+  } 
+
+  useEffect(()=>{
+    if (props.visible){
+      openModal()
+    } else{
+      close()
+    }
+  },[props.visible])
 
   return (
     <div className="containerAOI">
-      <Modal open={setOpen} dimmer="blurring"> 
+      <Modal open={open} dimmer="blurring"> 
         <Modal.Header>
           <p style={{ width: "100%" }}>
             Selecione uma Imagem
@@ -19,7 +30,7 @@ const AOImodal = (props) => {
               name="times"
               link
               style={{ position: "absolute", right: "10px" }}
-              onClick={()=> setClose(false)}
+              onClick={props.onClose}
             />
           </p>
         </Modal.Header>
@@ -33,11 +44,11 @@ const AOImodal = (props) => {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
-          <Button color="red" onClick={()=> setClose(false)}>
+          <Button color="red" onClick={props.onClose}>
             <Icon name="remove" />
             Cancelar
           </Button>
-          <Button color="green" onClick={()=> setClose(false)}>
+          <Button color="green" onClick={props.onClose}>
             <Icon name="checkmark" />
             Confirmar
           </Button>
