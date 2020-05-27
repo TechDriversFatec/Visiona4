@@ -5,7 +5,6 @@ import './Header.scss'
 
 const Header = () => (
   <div className="header">
-    <h1 className="title">Talhões</h1>
     <SelectSatellite />
     <SelectDropdown />
   </div>
