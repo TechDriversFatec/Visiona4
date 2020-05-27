@@ -19,8 +19,8 @@ const Mapa = props => {
     const getLatlon = param => {
       const coordinates = param;
       const coords = coordinates[0].map(val => `${val.lat.toFixed(6)} ${val.lng.toFixed(6)}`).join(",");
-      setVisible(true);
       console.log(coords);
+      setVisible(true);
     };
 
   const { coord, typeSatellite, geoJSON } = props;
@@ -40,7 +40,6 @@ const Mapa = props => {
     }
     return null;
   };
-
   updateGeoJSON()
   return (
     <Map
@@ -71,7 +70,7 @@ const Mapa = props => {
         />
         <GeoJSON ref={geoJSONRef} />
       </FeatureGroup>
-      <AOImodal visible={visible}/>
+      <AOImodal visible={visible} onClose={() => setVisible(false)}/>
     </Map>
   );
 };
