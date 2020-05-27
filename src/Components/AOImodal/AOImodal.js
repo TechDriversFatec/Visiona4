@@ -5,12 +5,12 @@ import { Modal, Icon, Button, Image} from "semantic-ui-react";
 
 const AOImodal = (props) => {
   const [open, setOpen] = useState(false)
-  
+
   const close = () => setOpen(false)
 
   const openModal = () => {
     setOpen(true)
-  } 
+  }
 
   useEffect(()=>{
     if (props.visible){
@@ -22,7 +22,7 @@ const AOImodal = (props) => {
 
   return (
     <div className="containerAOI">
-      <Modal open={open} dimmer="blurring"> 
+      <Modal open={open} dimmer="blurring">
         <Modal.Header>
           <p style={{ width: "100%" }}>
             Selecione uma Imagem
@@ -36,7 +36,7 @@ const AOImodal = (props) => {
         </Modal.Header>
         <Modal.Content>
           <Modal.Description>
-          <Image
+            <Image
               wrapped
               size='small'
               src='https://react.semantic-ui.com/images/avatar/large/rachel.png'

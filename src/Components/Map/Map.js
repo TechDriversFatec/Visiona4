@@ -70,7 +70,7 @@ const Mapa = props => {
         />
         <GeoJSON ref={geoJSONRef} />
       </FeatureGroup>
-      <AOImodal visible={visible} onClose={() => setVisible(false)}/>
+      <AOImodal visible={visible} onClose={() => setVisible(false)} />
     </Map>
   );
 };

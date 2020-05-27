@@ -2,7 +2,7 @@ import React from 'react'
 
 const visiona_url = 'http://www.visionaespacial.com.br'
 const About = () => (
-  <div>
+  <div className="about">
     <h1>About</h1>
     <p>Projeto integrador (PI) realizado na FATEC-JS</p>
     <p>
