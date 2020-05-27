@@ -22,11 +22,11 @@ const Base = (props) => {
   return(
     <div>
       <Sidebar visible={visible}>
-        <header className="header">
-          <h1 className="title">Talhões</h1>
-          <Button onClick={toggleBar}>
+        <header className="head">
+          <Button className="bnt" color="black" onClick={toggleBar}>
             <Icon name="sidebar" />
           </Button>
+          <h1 className="title">Talhões</h1>
         </header>
         {props.children}
       </Sidebar>
