@@ -1,23 +1,28 @@
 /* eslint-disable max-len */
-import React, {useRef} from "react";
+import React, {useRef, useState} from "react";
 import { Map, TileLayer, FeatureGroup, GeoJSON} from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
 import { connect } from "react-redux";
 import SentinelWMS from "../SentinelWMS";
+import AOImodal from '../AOImodal/AOImodal'
 import "leaflet-draw/dist/leaflet.draw.css";
 import "leaflet/dist/leaflet.css";
 import "./Map.scss";
 
-const baseUrlTileLayer =
-  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
-
-const getLatlon = param => {
-  const coordinates = param;
-  const coords = coordinates[0].map(val => `${val.lat.toFixed(6)} ${val.lng.toFixed(6)}`).join(",");
-  console.log(coords);
-};
 
 const Mapa = props => {
+    const baseUrlTileLayer =
+    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
+
+    const [visible, setVisible] = useState(false);
+
+    const getLatlon = param => {
+      const coordinates = param;
+      const coords = coordinates[0].map(val => `${val.lat.toFixed(6)} ${val.lng.toFixed(6)}`).join(",");
+      console.log(coords);
+      setVisible(true);
+    };
+
   const { coord, typeSatellite, geoJSON } = props;
   const mapRef = useRef(null)
   const geoJSONRef = useRef(null)
@@ -35,7 +40,6 @@ const Mapa = props => {
     }
     return null;
   };
-
   updateGeoJSON()
   return (
     <Map
@@ -66,6 +70,7 @@ const Mapa = props => {
         />
         <GeoJSON ref={geoJSONRef} />
       </FeatureGroup>
+      <AOImodal visible={visible} onClose={() => setVisible(false)} />
     </Map>
   );
 };

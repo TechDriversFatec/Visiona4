@@ -7,11 +7,14 @@ import "./index.scss";
 import * as serviceWorker from "./serviceWorker";
 import Router from "./router";
 import { Store } from "./store";
+import Base from "./Components/Base"
 
 ReactDOM.render(
   <Provider store={Store}>
     <HashRouter basename={process.env.PUBLIC_URL}>
-      <Router />
+      <Base>
+        <Router />
+      </Base>
     </HashRouter>
   </Provider>,
   document.getElementById("root")
