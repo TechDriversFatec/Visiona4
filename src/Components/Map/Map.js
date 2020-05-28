@@ -11,17 +11,22 @@ import "./Map.scss";
 
 
 const Mapa = props => {
-    const baseUrlTileLayer =
-    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
+  const baseUrlTileLayer =
+  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
 
-    const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [coords, setCoords] = useState('')
 
-    const getLatlon = param => {
-      const coordinates = param;
-      const coords = coordinates[0].map(val => `${val.lat.toFixed(6)} ${val.lng.toFixed(6)}`).join(",");
-      console.log(coords);
-      setVisible(true);
-    };
+  const getLatlon = param => {
+    const coordinates = param;
+    const coordsLatLon = coordinates[0];
+
+    coordsLatLon.push(coordinates[0][0])
+    const coordsLngLat = coordsLatLon.map(val => `${val.lat.toFixed(6)} ${val.lng.toFixed(6)}`).join(",");
+    setCoords(coordsLngLat)
+    setVisible(true);
+    return coords;
+  };
 
   const { coord, typeSatellite, geoJSON } = props;
   const mapRef = useRef(null)
@@ -70,7 +75,7 @@ const Mapa = props => {
         />
         <GeoJSON ref={geoJSONRef} />
       </FeatureGroup>
-      <AOImodal visible={visible} onClose={() => setVisible(false)} />
+      <AOImodal visible={visible} onClose={() => setVisible(false)} coords={coords} />
     </Map>
   );
 };

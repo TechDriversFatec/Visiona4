@@ -3,13 +3,33 @@ import React, { useState, useEffect} from "react";
 import "./aoiModal.scss"
 import { Modal, Icon, Button, Image} from "semantic-ui-react";
 
+const axios = require('axios');
+
 const AOImodal = (props) => {
+  console.log("props coords -->", props.coords)
   const [open, setOpen] = useState(false)
 
   const close = () => setOpen(false)
 
   const openModal = () => {
     setOpen(true)
+  }
+
+  function sendCoords() {
+    const url = "http://127.0.0.1:3333/api/v1/download"
+    const coords = {"coords": `${props.coords}`}
+    const headers = new Headers({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+  })
+    console.log("vai ser enviado")
+
+    axios({
+      method: 'get',
+      url,
+      headers,
+      params: coords
+    });
   }
 
   useEffect(()=>{
@@ -48,7 +68,7 @@ const AOImodal = (props) => {
             <Icon name="remove" />
             Cancelar
           </Button>
-          <Button color="green" onClick={props.onClose}>
+          <Button color="green" onClick={() => sendCoords()}>
             <Icon name="checkmark" />
             Confirmar
           </Button>
