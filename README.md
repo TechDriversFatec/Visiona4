@@ -1,10 +1,8 @@
 # Plataforma de Detecção de Talhões
 
-## Equipe
 ### Equipe 4
 ### Bruno Henrique, Iago Cardial, Matheus Vilela, Mayra Bernardes e Willyan Antunes
 #
-
 ### Entregas
 ### [- Gerenciamento da Sprint - Burn Down e Custo](https://drive.google.com/open?id=18nxotizbgWOUV79GEEmgSKg7JJiXPh1RW-djI0H_5po)
 
