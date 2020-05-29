@@ -1,13 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect} from "react";
 import "./aoiModal.scss"
-import { Modal, Icon, Button, Image} from "semantic-ui-react";
+import { Modal, Icon, Button, Image, Segment, Dimmer, Loader} from "semantic-ui-react";
 
 const axios = require('axios');
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 const AOImodal = (props) => {
-  console.log("props coords -->", props.coords)
   const [open, setOpen] = useState(false)
+  const [loading, setLoading] = useState('')
 
   const close = () => setOpen(false)
 
@@ -16,20 +18,80 @@ const AOImodal = (props) => {
   }
 
   function sendCoords() {
-    const url = "http://127.0.0.1:3333/api/v1/download"
+    setLoading(true)
+    const url = `${apiUrl}/api/v1/download`
     const coords = {"coords": `${props.coords}`}
     const headers = new Headers({
       'Accept': 'application/json',
       'Content-Type': 'application/json',
   })
-    console.log("vai ser enviado")
 
     axios({
       method: 'get',
       url,
       headers,
       params: coords
+    })
+    .then(response => {
+      setLoading(false)
+      const {status} = response
+      if (status === 200) {
+        console.log("completo")
+      }
+    })
+    .catch(error => {
+      console.log(JSON.stringify(error))
     });
+  }
+
+  function Loading() {
+    return (
+      <Segment>
+        <Dimmer active inverted>
+          <Loader size='medium'>Enviando</Loader>
+        </Dimmer>
+
+        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+      </Segment>
+    )
+  }
+
+  function Success() {
+    const {location} = window
+    return(
+      <div>
+        <Modal.Content>
+          <span id="question" style={{display: 'flex', justifyContent: 'center', fontSize:20}}>
+            Imagem enviada com sucesso!
+          </span>
+        </Modal.Content>
+        <Modal.Actions id="buttons" style={{display:'flex', justifyContent: 'center', marginTop:'30px'}}>
+          <Button
+            color="green"
+            onClick={() => location.reload()}
+          >
+            <Icon name="checkmark" />
+            Ok
+          </Button>
+        </Modal.Actions>
+      </div>
+    )
+  }
+
+  function Validating() {
+    if (loading === true) {
+      document.getElementById('question').style.display = "none";
+      return (
+        Loading()
+      )
+    }
+
+    if (loading === false) {
+      document.getElementById('buttons').style.display = "none";
+      return(
+        Success()
+      )
+    }
   }
 
   useEffect(()=>{
@@ -45,7 +107,7 @@ const AOImodal = (props) => {
       <Modal open={open} dimmer="blurring">
         <Modal.Header>
           <p style={{ width: "100%" }}>
-            Selecione uma Imagem
+            <span style={{marginLeft: "45%"}}>Atenção</span>
             <Icon
               name="times"
               link
@@ -55,15 +117,12 @@ const AOImodal = (props) => {
           </p>
         </Modal.Header>
         <Modal.Content>
-          <Modal.Description>
-            <Image
-              wrapped
-              size='small'
-              src='https://react.semantic-ui.com/images/avatar/large/rachel.png'
-            />
-          </Modal.Description>
+          <span id="question" style={{display: 'flex', justifyContent: 'center', fontSize:20}}>
+            Deseja enviar essa área de interesse?
+          </span>
+          {Validating()}
         </Modal.Content>
-        <Modal.Actions>
+        <Modal.Actions id="buttons">
           <Button color="red" onClick={props.onClose}>
             <Icon name="remove" />
             Cancelar
