@@ -6,10 +6,12 @@ import { Modal, Icon, Button, Image, Segment, Dimmer, Loader} from "semantic-ui-
 const axios = require('axios');
 
 const apiUrl = process.env.REACT_APP_API_URL;
+const awsUrl = process.env.REACT_APP_AWS_URL
 
 const AOImodal = (props) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState('')
+  const [imageName, setImageName] = useState('')
 
   const close = () => setOpen(false)
 
@@ -36,12 +38,9 @@ const AOImodal = (props) => {
       setLoading(false)
       const {status} = response
       if (status === 200) {
-        console.log("completo")
+        setImageName(response.data.names.name)
       }
     })
-    .catch(error => {
-      console.log(JSON.stringify(error))
-    });
   }
 
   function Loading() {
@@ -61,11 +60,22 @@ const AOImodal = (props) => {
     return(
       <div>
         <Modal.Content>
-          <span id="question" style={{display: 'flex', justifyContent: 'center', fontSize:20}}>
+          <p id="question" style={{display: 'flex', justifyContent: 'center', fontSize:20}}>
             Imagem enviada com sucesso!
-          </span>
+          </p>
+          <p id="question" style={{display: 'flex', justifyContent: 'center', fontSize:20}}>
+            Faça o download da imagem clicando no link abaixo
+          </p>
+          <p id="question" style={{display: 'flex', justifyContent: 'center', fontSize:20}}>
+            <a href={`${awsUrl}/${imageName}.tiff`} target="_blank" rel="noopener noreferrer">
+              {`${awsUrl}/${imageName}.tiff`}
+            </a>
+          </p>
         </Modal.Content>
-        <Modal.Actions id="buttons" style={{display:'flex', justifyContent: 'center', marginTop:'30px'}}>
+        <Modal.Actions
+          id="buttons"
+          style={{display:'flex', justifyContent: 'center', marginTop:'30px'}}
+        >
           <Button
             color="green"
             onClick={() => location.reload()}
