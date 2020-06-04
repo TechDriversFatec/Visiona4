@@ -1,3 +1,3 @@
-import AOImap from './AOImap'
+import AOImap from './AOImap';
 
-export {AOImap}
+export { AOImap };

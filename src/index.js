@@ -1,13 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { HashRouter } from "react-router-dom";
-import {Provider} from 'react-redux'
-import 'semantic-ui-css/semantic.min.css'
-import "./index.scss";
-import * as serviceWorker from "./serviceWorker";
-import Router from "./router";
-import { Store } from "./store";
-import Base from "./Components/Base"
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { HashRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import 'semantic-ui-css/semantic.min.css';
+import './index.scss';
+import * as serviceWorker from './serviceWorker';
+import Router from './router';
+import { Store } from './store';
+import Base from './Components/Base';
 
 ReactDOM.render(
   <Provider store={Store}>
@@ -17,7 +17,7 @@ ReactDOM.render(
       </Base>
     </HashRouter>
   </Provider>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

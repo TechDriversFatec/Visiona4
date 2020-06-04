@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Search } from "semantic-ui-react";
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import {updateCoords} from '../../action'
+import React, { useState } from 'react';
+import { Search } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { updateCoords } from '../../action';
 
-import IconPlace from '../../icon/place.png'
+import IconPlace from '../../icon/place.png';
 
-import "./SelectDropdown.scss"
+import './SelectDropdown.scss';
 
 const COORD_REGEX = /^(-?\d+(\.\d+)?),( ?)(-?\d+(\.\d+)?)$/;
 
@@ -32,17 +32,17 @@ function searchByQuery(query) {
   const formatedQuery = `${encodeURIComponent(query)}`;
   return fetch(
     `https://nominatim.openstreetmap.org/search.php?q=${formatedQuery}&format=json`
-  ).then(res => res.json());
+  ).then((res) => res.json());
 }
 
 function getPLaceList(response = []) {
   return response
-    .map(place => ({
+    .map((place) => ({
       title: place.display_name,
       value: { lat: place.lat, lon: place.lon },
     }))
     .filter((value, index, self) => {
-      const first = self.findIndex(v => v.title === value.title);
+      const first = self.findIndex((v) => v.title === value.title);
       return first === index;
     });
 }
@@ -51,7 +51,8 @@ const SelectDropdown = (props) => {
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState([]);
 
-  const {updateCoords} = props
+  // eslint-disable-next-line no-shadow
+  const { updateCoords } = props;
   /**
    * @param {string} value
    */
@@ -69,8 +70,7 @@ const SelectDropdown = (props) => {
 
   /** @TODO implement this */
   function selectResult(e, { result }) {
-    updateCoords(result.value)
-
+    updateCoords(result.value);
   }
 
   return (
@@ -83,18 +83,18 @@ const SelectDropdown = (props) => {
         onSearchChange={(e, { value }) => search(value)}
         onResultSelect={selectResult}
         placeholder="Digite um lugar"
-
       />
     </div>
   );
 };
 
-const mapStateToProps = store =>({
-  coord:{
-    lat:store.positionState.lat,
-    lon:store.positionState.lon
-  }
-})
-const mapDispatchToProps = dispatch => bindActionCreators({updateCoords}, dispatch)
+const mapStateToProps = (store) => ({
+  coord: {
+    lat: store.positionState.lat,
+    lon: store.positionState.lon,
+  },
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ updateCoords }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectDropdown);

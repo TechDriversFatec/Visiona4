@@ -1,3 +1,3 @@
-import AOImodal from "./AOImodal";
+import AOImodal from './AOImodal';
 
 export default AOImodal;

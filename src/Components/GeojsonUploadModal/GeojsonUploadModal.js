@@ -1,40 +1,41 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState, useMemo } from "react";
-import { Modal, Icon, Button } from "semantic-ui-react";
-import { useDropzone } from "react-dropzone";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { updateGeoJson } from "../../action";
+import React, { useState, useMemo } from 'react';
+import { Modal, Icon, Button } from 'semantic-ui-react';
+import { useDropzone } from 'react-dropzone';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { updateGeoJson } from '../../action';
 
 const baseStyle = {
   flex: 1,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  padding: "20px",
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '20px',
   borderWidth: 2,
   borderRadius: 2,
-  borderColor: "#eeeeee",
-  borderStyle: "dashed",
-  backgroundColor: "#fafafa",
-  color: "#bdbdbd",
-  outline: "none",
-  minHeight: "250px",
-  transition: "border .24s ease-in-out",
-  cursor: "pointer",
+  borderColor: '#eeeeee',
+  borderStyle: 'dashed',
+  backgroundColor: '#fafafa',
+  color: '#bdbdbd',
+  outline: 'none',
+  minHeight: '250px',
+  transition: 'border .24s ease-in-out',
+  cursor: 'pointer',
 };
 
 const activeStyle = {
-  borderColor: "#2196f3",
+  borderColor: '#2196f3',
 };
 
 const rejectStyle = {
-  borderColor: "#ff1744",
+  borderColor: '#ff1744',
 };
 
-const GeojsonUploadModal = props => {
+const GeojsonUploadModal = (props) => {
   const [open, setOpen] = useState(false);
+  // eslint-disable-next-line no-shadow
   const { updateGeoJson } = props;
   const [geojson, setGeojson] = useState();
   const closeModal = () => {
@@ -43,11 +44,11 @@ const GeojsonUploadModal = props => {
   };
   const openModal = () => setOpen(true);
 
-  const extractJson = file => {
+  const extractJson = (file) => {
     return new Promise((resolve, reject) => {
       try {
         const reader = new FileReader();
-        reader.onload = e => {
+        reader.onload = (e) => {
           resolve(JSON.parse(e.target.result));
         };
         reader.readAsText(file);
@@ -57,18 +58,23 @@ const GeojsonUploadModal = props => {
     });
   };
 
-  const validateGeojson = json => {
-    return json.type === "FeatureCollection" && Array.isArray(json.features);
+  const validateGeojson = (json) => {
+    return json.type === 'FeatureCollection' && Array.isArray(json.features);
   };
 
-  const getGeoJson = async files => {
+  const getGeoJson = async (files) => {
     const file = files.pop();
     const json = await extractJson(file);
     if (validateGeojson(json)) setGeojson(json);
   };
 
-  const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({
-    accept: ".json,application/json,.geojson",
+  const {
+    getRootProps,
+    getInputProps,
+    isDragActive,
+    isDragReject,
+  } = useDropzone({
+    accept: '.json,application/json,.geojson',
     multiple: false,
     onDrop: getGeoJson,
   });
@@ -85,7 +91,7 @@ const GeojsonUploadModal = props => {
   const sendGeoJSON = () => {
     if (!geojson) return;
     updateGeoJson(geojson);
-    closeModal()
+    closeModal();
   };
 
   return (
@@ -96,12 +102,12 @@ const GeojsonUploadModal = props => {
       </Button>
       <Modal open={open} dimmer="blurring">
         <Modal.Header>
-          <p style={{ width: "100%" }}>
+          <p style={{ width: '100%' }}>
             Envie um Geojson
             <Icon
               name="times"
               link
-              style={{ position: "absolute", right: "10px" }}
+              style={{ position: 'absolute', right: '10px' }}
               onClick={closeModal}
             />
           </p>
@@ -139,8 +145,9 @@ const GeojsonUploadModal = props => {
     </div>
   );
 };
-const mapStateToProps = store => ({
+const mapStateToProps = (store) => ({
   geoJSON: store.geoJSONState.geoJSON,
 });
-const mapDispatchToProps = dispatch => bindActionCreators({ updateGeoJson }, dispatch);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ updateGeoJson }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(GeojsonUploadModal);

@@ -1,8 +1,8 @@
-import React from 'react'
-import GeojsonUploadModal from "../GeojsonUploadModal";
-import CloudCoverage from '../CloudCoverage/CloudCoverage'
+import React from 'react';
+import GeojsonUploadModal from '../GeojsonUploadModal';
+import CloudCoverage from '../CloudCoverage/CloudCoverage';
 // import AOImodal from '../AOImodal/AOImodal'
-import './Footer.scss'
+import './Footer.scss';
 
 const Footer = () => (
   <div className="footer">
@@ -11,4 +11,4 @@ const Footer = () => (
   </div>
 );
 
-export default Footer
+export default Footer;

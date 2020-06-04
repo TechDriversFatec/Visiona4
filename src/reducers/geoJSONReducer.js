@@ -1,4 +1,4 @@
-import { SET_GEOJSON } from "../action/actionTypes";
+import { SET_GEOJSON } from '../action/actionTypes';
 
 const inititalState = {
   geoJSON: undefined,

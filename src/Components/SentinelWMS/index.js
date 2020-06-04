@@ -1,3 +1,3 @@
-import SentinelWMS from "./SentinelWMS";
+import SentinelWMS from './SentinelWMS';
 
-export default SentinelWMS
+export default SentinelWMS;
