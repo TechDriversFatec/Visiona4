@@ -1,25 +1,25 @@
-import React, {useState} from 'react'
-import { Icon, Button } from 'semantic-ui-react'
-import Sidebar from '../Sidebar'
-import './Base.scss'
+import React, { useState } from 'react';
+import { Icon, Button } from 'semantic-ui-react';
+import Sidebar from '../Sidebar';
+import './Base.scss';
 
-const Base = (props) => {
-  const [visible, setVisible] = useState(false)
+const Base = () => {
+  const [visible, setVisible] = useState(false);
   const openBar = () => {
-    setVisible(true)
-  }
+    setVisible(true);
+  };
   const closeBar = () => {
-    setVisible(false)
-  }
+    setVisible(false);
+  };
   const toggleBar = () => {
     if (visible) {
-      closeBar()
-    }else{
-      openBar()
+      closeBar();
+    } else {
+      openBar();
     }
-  }
+  };
 
-  return(
+  return (
     <div>
       <Sidebar visible={visible}>
         <header className="head">
@@ -28,10 +28,9 @@ const Base = (props) => {
           </Button>
           <h1 className="title">Talhões</h1>
         </header>
-        {props.children}
       </Sidebar>
     </div>
   );
 };
 
-export default Base
+export default Base;

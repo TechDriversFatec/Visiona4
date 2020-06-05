@@ -1,54 +1,55 @@
 /* eslint-disable max-len */
-import React, {useRef, useState} from "react";
-import { Map, TileLayer, FeatureGroup, GeoJSON} from "react-leaflet";
-import { EditControl } from "react-leaflet-draw";
-import { connect } from "react-redux";
-import SentinelWMS from "../SentinelWMS";
-import AOImodal from '../AOImodal/AOImodal'
-import "leaflet-draw/dist/leaflet.draw.css";
-import "leaflet/dist/leaflet.css";
-import "./Map.scss";
+import React, { useRef, useState } from 'react';
+import { Map, TileLayer, FeatureGroup, GeoJSON } from 'react-leaflet';
+import { EditControl } from 'react-leaflet-draw';
+import { connect } from 'react-redux';
+import SentinelWMS from '../SentinelWMS';
+import AOImodal from '../AOImodal/AOImodal';
+import 'leaflet-draw/dist/leaflet.draw.css';
+import 'leaflet/dist/leaflet.css';
+import './Map.scss';
 
-
-const Mapa = props => {
+const Mapa = (props) => {
   const baseUrlTileLayer =
-  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
+    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
 
   const [visible, setVisible] = useState(false);
-  const [coords, setCoords] = useState('')
+  const [coords, setCoords] = useState('');
 
-  const getLatlon = param => {
+  const getLatlon = (param) => {
     const coordinates = param;
     const coordsLatLon = coordinates[0];
 
-    coordsLatLon.push(coordinates[0][0])
-    const coordsLngLat = coordsLatLon.map(val => `${val.lat.toFixed(6)} ${val.lng.toFixed(6)}`).join(",");
-    setCoords(coordsLngLat)
+    coordsLatLon.push(coordinates[0][0]);
+    const coordsLngLat = coordsLatLon
+      .map((val) => `${val.lat.toFixed(6)} ${val.lng.toFixed(6)}`)
+      .join(',');
+    setCoords(coordsLngLat);
     setVisible(true);
     return coords;
   };
 
   const { coord, typeSatellite, geoJSON } = props;
-  const mapRef = useRef(null)
-  const geoJSONRef = useRef(null)
-  const updateGeoJSON = ()=>{
-    if(!mapRef.current || !geoJSONRef.current ||!geoJSON) return
-    const map = mapRef.current.leafletElement
-    const gJSON = geoJSONRef.current.leafletElement
-    gJSON.addData(geoJSON)
-    map.fitBounds(gJSON.getBounds())
-  }
+  const mapRef = useRef(null);
+  const geoJSONRef = useRef(null);
+  const updateGeoJSON = () => {
+    if (!mapRef.current || !geoJSONRef.current || !geoJSON) return;
+    const map = mapRef.current.leafletElement;
+    const gJSON = geoJSONRef.current.leafletElement;
+    gJSON.addData(geoJSON);
+    map.fitBounds(gJSON.getBounds());
+  };
 
-  const getWms = type => {
-    if (type === "sentinel") {
+  const getWms = (type) => {
+    if (type === 'sentinel') {
       return SentinelWMS(props.cloudValue);
     }
     return null;
   };
-  updateGeoJSON()
+  updateGeoJSON();
   return (
     <Map
-      style={{ height: "80%", width: "100vw" }}
+      style={{ height: '80%', width: '100vw' }}
       zoom={7}
       center={[coord.lat, coord.lon]}
       maxZoom={17}
@@ -60,7 +61,7 @@ const Mapa = props => {
       <FeatureGroup>
         <EditControl
           position="bottomright"
-          onCreated={e => {
+          onCreated={(e) => {
             // eslint-disable-next-line no-underscore-dangle
             getLatlon(e.layer._latlngs);
           }}
@@ -75,12 +76,16 @@ const Mapa = props => {
         />
         <GeoJSON ref={geoJSONRef} />
       </FeatureGroup>
-      <AOImodal visible={visible} onClose={() => setVisible(false)} coords={coords} />
+      <AOImodal
+        visible={visible}
+        onClose={() => setVisible(false)}
+        coords={coords}
+      />
     </Map>
   );
 };
 
-const mapStateToProps = store => ({
+const mapStateToProps = (store) => ({
   coord: {
     lat: store.positionState.lat,
     lon: store.positionState.lon,
