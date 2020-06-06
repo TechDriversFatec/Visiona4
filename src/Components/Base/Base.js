@@ -3,7 +3,8 @@ import { Icon, Button } from 'semantic-ui-react';
 import Sidebar from '../Sidebar';
 import './Base.scss';
 
-const Base = () => {
+const Base = (props) => {
+  const { children } = props;
   const [visible, setVisible] = useState(false);
   const openBar = () => {
     setVisible(true);
@@ -28,6 +29,7 @@ const Base = () => {
           </Button>
           <h1 className="title">Talhões</h1>
         </header>
+        {children}
       </Sidebar>
     </div>
   );

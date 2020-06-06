@@ -19,19 +19,19 @@ const openBar = (props) => {
           width="thin"
         >
           <Link to="/">
-            <Menu.Item as="a">
+            <Menu.Item>
               <Icon name="desktop" />
               Tratamento de imagem
             </Menu.Item>
           </Link>
           <Link to="/AOI">
-            <Menu.Item as="a">
+            <Menu.Item>
               <Icon name="map" />
               WebGis
             </Menu.Item>
           </Link>
           <Link to="/about">
-            <Menu.Item as="a">
+            <Menu.Item>
               <Icon name="address card" />
               About
             </Menu.Item>
