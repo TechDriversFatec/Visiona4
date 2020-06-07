@@ -13,6 +13,9 @@ const Mapa = (props) => {
   const baseUrlTileLayer =
     'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
 
+  const baseUrlState =
+    'https://stamen-tiles-{s}.a.ssl.fastly.net/toner-hybrid/{z}/{x}/{y}{r}.png';
+
   const [visible, setVisible] = useState(false);
   const [coords, setCoords] = useState('');
 
@@ -57,6 +60,7 @@ const Mapa = (props) => {
       ref={mapRef}
     >
       <TileLayer url={baseUrlTileLayer} />
+      <TileLayer url={baseUrlState} />
       {typeSatellite ? getWms(typeSatellite) : null}
       <FeatureGroup>
         <EditControl
