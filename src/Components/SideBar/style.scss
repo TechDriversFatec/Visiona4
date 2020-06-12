@@ -1,0 +1,103 @@
+.sideBar {
+  height: 90vh;
+  background-color: #eee9e9;
+
+  .title-container {
+    align-items: center;
+    display: flex;
+    padding-top: 10px;
+    justify-content: center;
+    .title {
+      font-family: Roboto-Bold;
+      font-size: 30px;
+      margin-left: 10px;
+    }
+  }
+
+  .container {
+    text-align: center;
+    padding: 10px !important;
+    
+    .title {
+      font-family: Roboto-Bold;
+      font-size: 20px;
+    }
+
+    .border {
+      margin-top: 20px;
+      border-bottom: 1px solid #c7c5c5;
+    }
+    
+    .select-container {
+      padding: 5px 20px 5px 20px;
+      display: flex;
+      align-items: center;
+
+      .ui.dropdown .menu .selected.item {
+        display: flex;
+        align-items: center;
+      }
+
+      .ui.selection.dropdown .menu > .item {
+        display: flex;
+        align-items: center;
+      }
+
+      .sattelite {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .coverage-container {
+    text-align: center;
+    margin-top: 20px;
+    display: block;
+    
+    .border {
+      border-bottom: 1px solid #c7c5c5;
+    }
+
+    .title {
+      font-family: Roboto-Bold;
+      font-size: 20px;
+    }
+
+    .Col {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+
+      .cloudValue {
+        font-size: 20px;
+      }
+    }
+  }
+  .date {
+    text-align: center;
+
+    .border {
+      margin-top: 20px;
+      border-bottom: 1px solid #c7c5c5;
+    }
+
+    .title {
+      font-family: Roboto-Bold;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .date-container {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .button {
+    align-items: center;
+    display: flex;
+    padding-top: 40px;
+    justify-content: center;
+  }
+
+}
