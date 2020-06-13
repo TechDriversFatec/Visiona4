@@ -31,7 +31,7 @@ const Mapa = () => {
 
   return (
     <Map
-      style={{ height: '100%' }}
+      style={{ height: '100%', width: '100%' }}
       zoom={11}
       center={[-23.607392, -46.560112]}
       maxZoom={17}
