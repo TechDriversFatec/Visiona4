@@ -1,6 +1,9 @@
 .container {
+  height: calc(100% - 50px);
+  margin: 0 !important;
+
   .col {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 }

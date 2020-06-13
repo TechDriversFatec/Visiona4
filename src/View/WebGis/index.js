@@ -7,16 +7,18 @@ import './style.scss';
 
 const WebGis = () => {
   return (
-    <div className="container">
+    <div style={{ height: '100%' }}>
       <Header />
-      <Grid>
-        <Grid.Column width={5} className="col">
-          <SideBar />
-        </Grid.Column>
-        <Grid.Column width={11} className="col">
-          <Map />
-        </Grid.Column>
-      </Grid>
+      <div className="container">
+        <Grid style={{ height: '100%' }}>
+          <Grid.Column width={5} className="col">
+            <SideBar />
+          </Grid.Column>
+          <Grid.Column width={11} className="col">
+            <Map />
+          </Grid.Column>
+        </Grid>
+      </div>
       {/* <Container className="container"> */}
       {/* <Row className="row"> */}
       {/* <Col className="col" sm={3}> */}

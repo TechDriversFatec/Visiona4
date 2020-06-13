@@ -1,9 +1,10 @@
 import React from 'react';
 import WebGis from './View/WebGis';
+import './style.scss';
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="app">
       <WebGis />
     </div>
   );
