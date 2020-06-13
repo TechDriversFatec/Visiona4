@@ -1,13 +1,13 @@
 /* eslint-disable max-len */
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { Map, TileLayer, FeatureGroup, GeoJSON } from 'react-leaflet';
-import { EditControl } from 'react-leaflet-draw';
+// import { EditControl } from 'react-leaflet-draw';
 import { connect } from 'react-redux';
-import SentinelWMS from '../SentinelWMS';
-import AOImodal from '../AOImodal/AOImodal';
-import 'leaflet-draw/dist/leaflet.draw.css';
+// import SentinelWMS from '../SentinelWMS';
+// import AOImodal from '../AOImodal/AOImodal';
+// import 'leaflet-draw/dist/leaflet.draw.css';
 import 'leaflet/dist/leaflet.css';
-import './Map.scss';
+import './style.scss';
 
 const Mapa = (props) => {
   const baseUrlTileLayer =
@@ -16,21 +16,21 @@ const Mapa = (props) => {
   const baseUrlState =
     'https://stamen-tiles-{s}.a.ssl.fastly.net/toner-hybrid/{z}/{x}/{y}{r}.png';
 
-  const [visible, setVisible] = useState(false);
-  const [coords, setCoords] = useState('');
+  // const [visible, setVisible] = useState(false);
+  // const [coords, setCoords] = useState('');
 
-  const getLatlon = (param) => {
-    const coordinates = param;
-    const coordsLatLon = coordinates[0];
+  // const getLatlon = (param) => {
+  //   const coordinates = param;
+  //   const coordsLatLon = coordinates[0];
 
-    coordsLatLon.push(coordinates[0][0]);
-    const coordsLngLat = coordsLatLon
-      .map((val) => `${val.lat.toFixed(6)} ${val.lng.toFixed(6)}`)
-      .join(',');
-    setCoords(coordsLngLat);
-    setVisible(true);
-    return coords;
-  };
+  //   coordsLatLon.push(coordinates[0][0]);
+  //   const coordsLngLat = coordsLatLon
+  //     .map((val) => `${val.lat.toFixed(6)} ${val.lng.toFixed(6)}`)
+  //     .join(',');
+  //   setCoords(coordsLngLat);
+  //   setVisible(true);
+  //   return coords;
+  // };
 
   const { coord, typeSatellite, geoJSON } = props;
   const mapRef = useRef(null);
@@ -45,14 +45,14 @@ const Mapa = (props) => {
 
   const getWms = (type) => {
     if (type === 'sentinel') {
-      return SentinelWMS(props.cloudValue);
+      // return SentinelWMS(props.cloudValue);
     }
     return null;
   };
   updateGeoJSON();
   return (
     <Map
-      style={{ height: '80%', width: '100vw' }}
+      style={{ width: '100%' }}
       zoom={7}
       center={[coord.lat, coord.lon]}
       maxZoom={17}
@@ -63,7 +63,7 @@ const Mapa = (props) => {
       <TileLayer url={baseUrlState} />
       {typeSatellite ? getWms(typeSatellite) : null}
       <FeatureGroup>
-        <EditControl
+        {/* <EditControl
           position="bottomright"
           onCreated={(e) => {
             // eslint-disable-next-line no-underscore-dangle
@@ -77,14 +77,14 @@ const Mapa = (props) => {
             polyline: false,
             circlemarker: false,
           }}
-        />
+        /> */}
         <GeoJSON ref={geoJSONRef} />
       </FeatureGroup>
-      <AOImodal
+      {/* <AOImodal
         visible={visible}
         onClose={() => setVisible(false)}
         coords={coords}
-      />
+      /> */}
     </Map>
   );
 };

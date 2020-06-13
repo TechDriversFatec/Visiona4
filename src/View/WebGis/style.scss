@@ -1,13 +1,6 @@
 .container {
-    padding: 0 !important;
-    max-width: 100% !important;
-    .row {
-        margin: 0 !important;
-        
-        .col {
-            padding: 0 !important;
-        }
-    }
-
+  .col {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 }
-

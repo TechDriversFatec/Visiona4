@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Icon, Button } from 'semantic-ui-react';
-import Sidebar from '../Sidebar';
-import './Base.scss';
+import Sidebar from '../Sidebar/Sidebar';
+// import './Base.scss';
 
 const Base = (props) => {
   const { children } = props;
