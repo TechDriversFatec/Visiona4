@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 
-import { Modal, Button, Header } from 'semantic-ui-react';
+import { Modal, Header } from 'semantic-ui-react';
+import { Button } from 'rsuite';
 import Dropzone from '../Dropzone';
+
+import 'semantic-ui-css/semantic.min.css';
 
 const ModalGeoJSON = (props) => {
   const [modalState, setModalState] = useState(false);
@@ -28,7 +31,7 @@ const ModalGeoJSON = (props) => {
     }
   };
   return (
-    <div>
+    <div className="upload">
       <Button onClick={() => setModalState(true)}>Importar GeoJSON</Button>
       <Modal open={modalState}>
         <Modal.Header>Selecione um GeoJSON</Modal.Header>

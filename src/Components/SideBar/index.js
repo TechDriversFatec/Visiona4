@@ -22,6 +22,7 @@ const SideBar = () => {
       <Sattelite />
       <Date />
       <CloudCoverage />
+
       <ModalGeoJSON
         className="modal-geojson"
         onClose={(f) => {
