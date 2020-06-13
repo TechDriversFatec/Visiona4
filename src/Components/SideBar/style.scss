@@ -1,7 +1,8 @@
 .sideBar {
-  height: 90vh;
+  width: 100%;
+  padding-left: 7px;
+  padding-right: 7px;
   background-color: #eee9e9;
-
   .title-container {
     align-items: center;
     display: flex;
@@ -17,7 +18,7 @@
   .container {
     text-align: center;
     padding: 10px !important;
-    
+
     .title {
       font-family: Roboto-Bold;
       font-size: 20px;
@@ -27,7 +28,7 @@
       margin-top: 20px;
       border-bottom: 1px solid #c7c5c5;
     }
-    
+
     .select-container {
       padding: 5px 20px 5px 20px;
       display: flex;
@@ -53,7 +54,7 @@
     text-align: center;
     margin-top: 20px;
     display: block;
-    
+
     .border {
       border-bottom: 1px solid #c7c5c5;
     }
@@ -100,4 +101,7 @@
     justify-content: center;
   }
 
+  .modal-geojson {
+    background-color: white !important;
+  }
 }

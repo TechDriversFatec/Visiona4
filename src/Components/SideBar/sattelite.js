@@ -34,7 +34,7 @@ const Sattelite = () => {
   ];
 
   // function to get band selected
-  function getBand(e, { value }): void {
+  function getBand(e, { value }) {
     console.log('banda -->', value);
   }
 

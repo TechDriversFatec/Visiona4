@@ -8,7 +8,7 @@ import './style.scss';
 
 // function to get range date
 const Date = () => {
-  function getDate(e): void {
+  function getDate(e) {
     const startDate = moment(e[0]).format('YYYY-MM-DD');
     const endDate = moment(e[1]).format('YYYY-MM-DD');
     console.log('startDate -->', startDate);

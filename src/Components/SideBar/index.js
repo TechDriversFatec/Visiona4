@@ -2,6 +2,7 @@ import React from 'react';
 import { DiAptana } from 'react-icons/di';
 import { Label } from 'semantic-ui-react';
 import { Button } from 'rsuite';
+import ModalGeoJSON from './modalGeoJSON';
 import Sattelite from './sattelite';
 import CloudCoverage from './cloudCoverage';
 import Date from './date';
@@ -21,7 +22,12 @@ const SideBar = () => {
       <Sattelite />
       <Date />
       <CloudCoverage />
-
+      <ModalGeoJSON
+        className="modal-geojson"
+        onClose={(f) => {
+          console.log(f);
+        }}
+      />
       <div className="button">
         <Button appearance="primary">Verificar catálogo</Button>
       </div>
