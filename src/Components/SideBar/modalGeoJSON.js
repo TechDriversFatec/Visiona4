@@ -23,6 +23,7 @@ const ModalGeoJSON = (props) => {
     setFile(null);
     closeModal();
   };
+
   const onGetFile = (fileArray) => {
     if (fileArray && fileArray.length) {
       setFile(fileArray[0]);

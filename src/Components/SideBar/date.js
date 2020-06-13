@@ -7,12 +7,19 @@ import 'rsuite/dist/styles/rsuite-default.css';
 import './style.scss';
 
 // function to get range date
-const Date = () => {
+const Date = (props) => {
+  const { RangeDate = () => {} } = props;
+
   function getDate(e) {
     const startDate = moment(e[0]).format('YYYY-MM-DD');
     const endDate = moment(e[1]).format('YYYY-MM-DD');
-    console.log('startDate -->', startDate);
-    console.log('endDate -->', endDate);
+    const date = {
+      date: {
+        startDate,
+        endDate,
+      },
+    };
+    RangeDate(date);
   }
 
   return (

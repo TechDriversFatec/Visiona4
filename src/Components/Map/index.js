@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable no-underscore-dangle */
+import React, { useState, useRef } from 'react';
 import { Map, TileLayer, FeatureGroup } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 
@@ -6,8 +7,10 @@ import 'leaflet-draw/dist/leaflet.draw.css';
 import 'leaflet/dist/leaflet.css';
 import './style.scss';
 
-const Mapa = () => {
+const Mapa = (props) => {
   const [coords, setCoords] = useState('');
+  const map = useRef(null);
+  const { GetBBox = () => {} } = props;
 
   const baseUrlTileLayer =
     'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
@@ -19,12 +22,29 @@ const Mapa = () => {
     const coordinates = param;
     const coordsLatLon = coordinates[0];
 
+    // bounding box
+    const latNE = map.current.leafletElement.getBounds()._northEast.lat;
+    const lngNE = map.current.leafletElement.getBounds()._northEast.lng;
+    const latSW = map.current.leafletElement.getBounds()._southWest.lat;
+    const lngSW = map.current.leafletElement.getBounds()._southWest.lng;
+
     coordsLatLon.push(coordinates[0][0]);
     const coordsLngLat = coordsLatLon
       .map((val) => `${val.lat.toFixed(6)} ${val.lng.toFixed(6)}`)
       .join(',');
     setCoords(coordsLngLat);
-    console.log('coordinates -->', coordsLngLat);
+
+    const data = {
+      bbox: {
+        latNE,
+        lngNE,
+        latSW,
+        lngSW,
+      },
+      coordsLngLat,
+    };
+
+    GetBBox(data);
     // setVisible(true);
     return coords;
   };
@@ -36,6 +56,7 @@ const Mapa = () => {
       center={[-23.607392, -46.560112]}
       maxZoom={17}
       minZoom={5}
+      ref={map}
     >
       <TileLayer url={baseUrlTileLayer} />
       <TileLayer url={baseUrlState} />

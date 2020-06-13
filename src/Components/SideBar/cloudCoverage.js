@@ -7,8 +7,9 @@ import 'semantic-ui-css/semantic.min.css';
 
 import './style.scss';
 
-const CloudCoverage = () => {
+const CloudCoverage = (props) => {
   const [value, setValue] = useState(50);
+  const { CloudChange = () => {} } = props;
 
   const settings = {
     start: 50,
@@ -18,7 +19,7 @@ const CloudCoverage = () => {
 
     onChange: (e) => {
       setValue(e);
-      console.log('NUVEM -->', value);
+      CloudChange(e);
     },
   };
 
