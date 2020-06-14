@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-
-import { Modal, Header } from 'semantic-ui-react';
-import { Button } from 'rsuite';
+import { Modal, Button } from 'rsuite';
 import Dropzone from '../Dropzone';
-
-import 'semantic-ui-css/semantic.min.css';
 
 const ModalGeoJSON = (props) => {
   const [modalState, setModalState] = useState(false);
@@ -34,24 +30,24 @@ const ModalGeoJSON = (props) => {
   return (
     <div className="upload">
       <Button onClick={() => setModalState(true)}>Importar GeoJSON</Button>
-      <Modal open={modalState}>
-        <Modal.Header>Selecione um GeoJSON</Modal.Header>
-        <Modal.Description>
-          <Header>Clique ou jogue seu arquivo GeoJSON aqui</Header>
-          <Dropzone onGetFile={onGetFile} />
-        </Modal.Description>
-        <Modal.Actions>
-          <Button onClick={closeAndRemoveFile} negative>
-            Cancelar
-          </Button>
-          <Button
-            onClick={closeModal}
-            positive
-            labelPosition="right"
-            icon="checkmark"
-            content="Enviar Arquivo"
+      <Modal show={modalState} onHide={closeAndRemoveFile}>
+        <Modal.Header>
+          <Modal.Title>Selecione um GeoJSON</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Dropzone
+            onGetFile={onGetFile}
+            mimeTypes={['application/geo+json', 'application/json']}
           />
-        </Modal.Actions>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button appearance="subtle" onClick={closeAndRemoveFile}>
+            Cancel
+          </Button>
+          <Button appearance="primary" onClick={closeModal}>
+            Ok
+          </Button>
+        </Modal.Footer>
       </Modal>
     </div>
   );

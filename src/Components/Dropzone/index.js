@@ -4,12 +4,15 @@ import './style.scss';
 
 const Dropzone = (props) => {
   const [files, setFiles] = useState([]);
-  const { onGetFile = () => {} } = props;
+  const { onGetFile = () => {}, mimeTypes = [] } = props;
   const onDrop = useCallback((acceptedFiles) => {
     setFiles(acceptedFiles);
     onGetFile(acceptedFiles);
   }, []);
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: mimeTypes.join(', '),
+  });
 
   return (
     <div {...getRootProps()} className="DropzoneComponent">

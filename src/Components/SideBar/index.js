@@ -12,13 +12,11 @@ import './style.scss';
 
 const SideBar = (props) => {
   const [cloud, setCloud] = useState(50);
-  const [rangedate, setDate] = useState(50);
-  const { onClickButton = () => {}, bbox } = props;
-
+  const [rangedate, setDate] = useState({});
+  const { onClickButton = () => {}, onReceiveGeoJSON = () => {} } = props;
   const data = {
     cloudCoverage: cloud,
     rangedate,
-    coords: bbox,
   };
 
   function getSideBarData() {
@@ -38,7 +36,9 @@ const SideBar = (props) => {
       <ModalGeoJSON
         className="modal-geojson"
         onClose={(f) => {
-          console.log(f);
+          if (f) {
+            onReceiveGeoJSON(f);
+          }
         }}
       />
       <div className="button">

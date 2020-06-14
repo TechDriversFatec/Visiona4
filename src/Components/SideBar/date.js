@@ -14,10 +14,8 @@ const Date = (props) => {
     const startDate = moment(e[0]).format('YYYY-MM-DD');
     const endDate = moment(e[1]).format('YYYY-MM-DD');
     const date = {
-      date: {
-        startDate,
-        endDate,
-      },
+      startDate,
+      endDate,
     };
     RangeDate(date);
   }
