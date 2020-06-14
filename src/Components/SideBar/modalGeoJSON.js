@@ -31,10 +31,8 @@ const ModalGeoJSON = (props) => {
   };
   return (
     <div className="upload">
-      <div style={{ marginBottom: 10 }}>
-        <Label className="title">
-          Área de interesse por upload de arquivo:
-        </Label>
+      <div className="title-container">
+        <span className="title">Área de interesse por upload de arquivo:</span>
       </div>
       <div
         style={{

@@ -1,122 +1,89 @@
-.sideBar {
+.container-nav {
   width: 100%;
-  padding-left: 7px;
-  padding-right: 7px;
-  background-color: #eee9e9;
   height: 100%;
 
-  .title-container {
-    align-items: center;
+  .nav-header{
+    padding: 20px ;
+    font-size: 16px;
+    background-color: #34c3ff;
+    color: #fff ;
     display: flex;
-    padding-top: 10px;
+    align-items: center;
     justify-content: center;
+
     .title {
-      font-family: Roboto-Bold;
       font-size: 30px;
       margin-left: 10px;
     }
   }
 
-  .container {
-    text-align: center;
-    padding: 10px !important;
+  .nav-body {
+    padding: 15px;
 
-    .title {
-      font-family: Roboto-Bold;
-      font-size: 20px;
-    }
-
-    .border {
+    .nav {
       margin-top: 20px;
-      border-bottom: 1px solid #c7c5c5;
-    }
 
-    .select-container {
-      padding: 5px 20px 5px 20px;
-      display: flex;
-      align-items: center;
+      .date {
+        text-align: center;
 
-      .ui.dropdown .menu .selected.item {
-        display: flex;
-        align-items: center;
+        .title {
+          font-size: 16px;
+          font-weight: bold;
+          color: #3697fb;
+          margin-bottom: 20px;
+        }
+
+        .date-container {
+          margin-top: 20px;
+        }
       }
 
-      .ui.selection.dropdown .menu > .item {
-        display: flex;
-        align-items: center;
+      .coverage-container {
+        text-align: center;
+
+        .title-container {
+          width:  100%;
+
+          .title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #3697fb;
+          }
+        }
+
+        .col {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .cloudValue {
+            font-size: 16px;
+            color: black;
+            font-weight: bold;
+            margin-left: 10px;
+          }
+        }
+
       }
 
-      .sattelite {
-        margin-left: 5px;
+      .upload {
+        text-align: center;
+
+        .title-container {
+          margin-bottom: 20px;
+
+          .title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #3697fb;
+          }
+        }
+
       }
-    }
-  }
 
-  .coverage-container {
-    text-align: center;
-    margin-top: 20px;
-    display: block;
-
-    .border {
-      border-bottom: 1px solid #c7c5c5;
-    }
-
-    .title {
-      font-family: Roboto-Bold;
-      font-size: 20px;
-    }
-
-    .Col {
-      display: flex !important;
-      align-items: center;
-      justify-content: center;
-
-      .cloudValue {
-        font-size: 20px;
+      .button {
+        text-align: center;
       }
-    }
-  }
-
-  .date {
-    text-align: center;
-
-    .border {
-      margin-top: 20px;
-      border-bottom: 1px solid #c7c5c5;
-    }
-
-    .title {
-      font-family: Roboto-Bold;
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    .date-container {
-      display: flex;
-      justify-content: center;
-    }
-  }
-
-  .button {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    margin-top: 100px;
-  }
-
-  .upload {
-    text-align: center;
-    margin-top: 40px;
-
-    .title {
-      font-family: Roboto-Bold;
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    .border {
-      margin-top: 20px;
-      border-bottom: 1px solid #c7c5c5;
     }
   }
 }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { DiAptana } from 'react-icons/di';
-import { Label } from 'semantic-ui-react';
-import { Button } from 'rsuite';
+import { Button, Sidenav, Nav } from 'rsuite';
 import ModalGeoJSON from './modalGeoJSON';
 import CloudCoverage from './cloudCoverage';
 import Date from './date';
@@ -24,28 +23,40 @@ const SideBar = (props) => {
   }
 
   return (
-    <div className="sideBar">
-      <div className="title-container">
-        <DiAptana size={30} />
-        <Label className="title">Configurações</Label>
-      </div>
-
-      <Date RangeDate={(date) => setDate(date)} />
-      <CloudCoverage CloudChange={(e) => setCloud(e)} />
-
-      <ModalGeoJSON
-        onClose={(f) => {
-          if (f) {
-            onReceiveGeoJSON(f);
-          }
-        }}
-      />
-
-      <div className="button">
-        <Button onClick={getSideBarData} appearance="primary">
-          Verificar catálogo
-        </Button>
-      </div>
+    <div className="container-nav">
+      <Sidenav defaultOpenKeys={['3', '4']} style={{ height: '100%' }}>
+        <Sidenav.Header className="nav-header">
+          <DiAptana size={30} />
+          <span className="title">Configurações</span>
+        </Sidenav.Header>
+        <Sidenav.Body className="nav-body">
+          <Nav className="nav">
+            <Date RangeDate={(date) => setDate(date)} />
+          </Nav>
+          <hr />
+          <Nav className="nav">
+            <CloudCoverage CloudChange={(e) => setCloud(e)} />
+          </Nav>
+          <hr />
+          <Nav className="nav">
+            <ModalGeoJSON
+              onClose={(f) => {
+                if (f) {
+                  onReceiveGeoJSON(f);
+                }
+              }}
+            />
+          </Nav>
+          <hr />
+          <Nav className="nav">
+            <div className="button">
+              <Button size="lg" onClick={getSideBarData} appearance="primary">
+                Verificar catálogo
+              </Button>
+            </div>
+          </Nav>
+        </Sidenav.Body>
+      </Sidenav>
     </div>
   );
 };

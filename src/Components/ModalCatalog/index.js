@@ -4,6 +4,8 @@ import { FaCloud, FaExternalLinkAlt } from 'react-icons/fa';
 import { MdDateRange } from 'react-icons/md';
 import { BsCaretRightFill, BsCaretLeftFill } from 'react-icons/bs';
 
+import './style.scss';
+
 const ModalCatalog = (props) => {
   const { SetPagination = () => {} } = props;
 
@@ -59,7 +61,7 @@ const ModalCatalog = (props) => {
   function Pagination() {
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <span style={{ marginRight: 10 }}> Pagina: </span>
+        <span style={{ marginRight: 10 }}> Página: </span>
 
         <div style={{ width: '115px', display: 'flex', alignItems: 'center' }}>
           <Button onClick={prev}>
@@ -82,7 +84,7 @@ const ModalCatalog = (props) => {
               {catalog.pagination && catalog.pagination.page}
             </span>
           </div>
-          <Button onClick={next}>
+          <Button size="lg" onClick={next}>
             <BsCaretRightFill />
           </Button>
         </div>
@@ -91,8 +93,8 @@ const ModalCatalog = (props) => {
   }
 
   return (
-    <Modal show={isVisible} onHide={onClose}>
-      <Modal.Header>Catalogo de imagens</Modal.Header>
+    <Modal show={isVisible} onHide={onClose} className="modal-container">
+      <Modal.Header className="header">Catálogo de imagens</Modal.Header>
       <Modal.Body>
         {isLoading ? <Placeholder.Paragraph rows={5} /> : catalogList()}
       </Modal.Body>

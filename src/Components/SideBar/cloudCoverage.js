@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Label, Grid } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import { Slider } from 'react-semantic-ui-range';
 import { BsFillCloudFill } from 'react-icons/bs';
 
@@ -25,13 +25,15 @@ const CloudCoverage = (props) => {
 
   return (
     <Grid className="coverage-container">
-      <Label className="title">Cobertura de nuvem</Label>
+      <div className="title-container">
+        <span className="title">Cobertura de nuvem</span>
+      </div>
       <Grid.Column width={16}>
         <Slider value={value} color="blue" settings={settings} />
       </Grid.Column>
-      <Grid.Column className="Col" width={16}>
+      <Grid.Column className="col" width={16}>
         <BsFillCloudFill size={30} />
-        <Label className="cloudValue">{value}%</Label>
+        <span className="cloudValue">{value}%</span>
       </Grid.Column>
       <div className="border" />
     </Grid>

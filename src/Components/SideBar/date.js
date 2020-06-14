@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 import { DateRangePicker } from 'rsuite';
-import { Label } from 'semantic-ui-react';
 
 import 'rsuite/dist/styles/rsuite-default.css';
 import './style.scss';
@@ -22,8 +21,7 @@ const Date = (props) => {
 
   return (
     <div className="date">
-      <Label className="title">Selecione o espaço de tempo:</Label>
-
+      <span className="title">Selecione o espaço de tempo:</span>
       <div className="date-container">
         <DateRangePicker
           format="DD MMM YYYY"
