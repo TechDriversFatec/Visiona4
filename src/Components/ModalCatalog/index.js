@@ -58,14 +58,34 @@ const ModalCatalog = (props) => {
 
   function Pagination() {
     return (
-      <div>
-        <Button onClick={prev}>
-          <BsCaretLeftFill />
-        </Button>
-        <span>{catalog.pagination && catalog.pagination.page}</span>
-        <Button onClick={next}>
-          <BsCaretRightFill />
-        </Button>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <span style={{ marginRight: 10 }}> Pagina: </span>
+
+        <div style={{ width: '115px', display: 'flex', alignItems: 'center' }}>
+          <Button onClick={prev}>
+            <BsCaretLeftFill />
+          </Button>
+          <div
+            style={{
+              marginLeft: '5px',
+              marginRight: '5px',
+              backgroundColor: 'gray',
+              width: '30px',
+              height: '30px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: '20px',
+            }}
+          >
+            <span style={{ color: 'white' }}>
+              {catalog.pagination && catalog.pagination.page}
+            </span>
+          </div>
+          <Button onClick={next}>
+            <BsCaretRightFill />
+          </Button>
+        </div>
       </div>
     );
   }
@@ -76,13 +96,13 @@ const ModalCatalog = (props) => {
       <Modal.Body>
         {isLoading ? <Placeholder.Paragraph rows={5} /> : catalogList()}
       </Modal.Body>
-      <Modal.Footer>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          {Pagination()}
-          <Button onClick={onClose} color="green">
-            Ok
-          </Button>
-        </div>
+      <Modal.Footer
+        style={{ display: 'flex', justifyContent: 'space-between' }}
+      >
+        {Pagination()}
+        <Button onClick={onClose} color="green">
+          Ok
+        </Button>
       </Modal.Footer>
     </Modal>
   );
