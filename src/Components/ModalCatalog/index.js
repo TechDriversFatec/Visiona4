@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal, Button, Placeholder, PanelGroup, Panel, Tag } from 'rsuite';
 import { FaCloud, FaExternalLinkAlt } from 'react-icons/fa';
 import { MdDateRange } from 'react-icons/md';
@@ -58,7 +58,7 @@ const ModalCatalog = (props) => {
 
   function Pagination() {
     return (
-      <div style>
+      <div>
         <Button onClick={prev}>
           <BsCaretLeftFill />
         </Button>
@@ -71,7 +71,7 @@ const ModalCatalog = (props) => {
   }
 
   return (
-    <Modal show={isVisible}>
+    <Modal show={isVisible} onHide={onClose}>
       <Modal.Header>Catalogo de imagens</Modal.Header>
       <Modal.Body>
         {isLoading ? <Placeholder.Paragraph rows={5} /> : catalogList()}

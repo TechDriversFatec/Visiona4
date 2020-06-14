@@ -112,6 +112,7 @@ const WebGis = () => {
           isLoading={catalogIsLoading}
           catalog={catalogData}
           SetPagination={handlePagination}
+          onClose={() => setCatalogVisible(false)}
         />
       </div>
     </div>
