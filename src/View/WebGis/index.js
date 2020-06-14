@@ -16,6 +16,7 @@ const WebGis = () => {
   const [catalogVisible, setCatalogVisible] = useState(false);
   const [catalogIsLoading, setCatalogIsLoading] = useState(false);
   const [catalogData, setCatalogData] = useState({});
+  const [form, setForm] = useState({});
 
   const normalizeBbox = (bbox) => [
     bbox.lngSW,
@@ -31,11 +32,14 @@ const WebGis = () => {
     if (!data.rangedate.startDate || !data.rangedate.endDate) {
       throw new Error('DateRangeNotDefined');
     }
+
     const bbox = normalizeBbox(coords.bbox);
+
     const {
       cloudCoverage: cloudCover,
       rangedate: { startDate: dateInit, endDate: dateEnd },
     } = data;
+
     return {
       cloudCover,
       dateInit,
@@ -43,11 +47,13 @@ const WebGis = () => {
       bbox,
     };
   };
+
   const getCatalog = async (data) => {
     try {
       setCatalogVisible(true);
       setCatalogIsLoading(true);
       const filter = prepareFilter(data);
+      setForm(filter);
       const { data: response } = await apiGetCatalog(filter);
       setCatalogData(response);
       setCatalogIsLoading(false);
@@ -62,6 +68,15 @@ const WebGis = () => {
       }
       setModalErrorVisible(true);
     }
+  };
+
+  const handlePagination = async (page) => {
+    console.log('PAGE -->', page);
+
+    setCatalogIsLoading(true);
+    const { data: response } = await apiGetCatalog({ ...form, page });
+    setCatalogData(response);
+    setCatalogIsLoading(false);
   };
 
   const geoJSONFileToGeoJSON = (file) => {
@@ -96,6 +111,7 @@ const WebGis = () => {
           isVisible={catalogVisible}
           isLoading={catalogIsLoading}
           catalog={catalogData}
+          SetPagination={handlePagination}
         />
       </div>
     </div>
