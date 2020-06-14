@@ -7,13 +7,26 @@ import 'leaflet-draw/dist/leaflet.draw.css';
 import 'leaflet/dist/leaflet.css';
 import './style.scss';
 
+const BASELAYER =
+  'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+
+const STATE_LAYER =
+  'https://stamen-tiles-{s}.a.ssl.fastly.net/toner-hybrid/{z}/{x}/{y}{r}.png';
+
+const normalizeBbox = (bbox) => {
+  const {
+    _northEast: { lat: latNE, lng: lngNE },
+    _southWest: { lat: latSW, lng: lngSW },
+  } = bbox;
+  return {
+    latNE,
+    lngNE,
+    latSW,
+    lngSW,
+  };
+};
+
 const Mapa = (props) => {
-  const baseUrlTileLayer =
-    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
-
-  const baseUrlState =
-    'https://stamen-tiles-{s}.a.ssl.fastly.net/toner-hybrid/{z}/{x}/{y}{r}.png';
-
   const map = useRef(null);
   const geoJSONRef = useRef();
 
@@ -23,28 +36,26 @@ const Mapa = (props) => {
     if (!map.current || !geoJSON || !geoJSONRef.current) return;
     const mapLeaflet = map.current.leafletElement;
     const gJSON = geoJSONRef.current.leafletElement;
+
     gJSON.addData(geoJSON);
     mapLeaflet.fitBounds(gJSON.getBounds());
+    GetBBox({
+      bbox: normalizeBbox(gJSON.getBounds()),
+      coordsWKT: geoJSON.features[0].geometry.coordinates[0]
+        .map((coord) => `${coord[0].toFixed(6)} ${coord[1].toFixed(6)}`)
+        .join(', '),
+    });
   }, [geoJSON]);
 
   const getLatlon = ({ latlng, bbox }) => {
     const [coords] = latlng;
     coords.push(coords[0]);
-    const {
-      _northEast: { lat: latNE, lng: lngNE },
-      _southWest: { lat: latSW, lng: lngSW },
-    } = bbox;
     const coordsWKT = coords
       .map((val) => `${val.lat.toFixed(6)} ${val.lng.toFixed(6)}`)
       .join(',');
 
     const data = {
-      bbox: {
-        latNE,
-        lngNE,
-        latSW,
-        lngSW,
-      },
+      bbox: normalizeBbox(bbox),
       coordsWKT,
     };
     GetBBox(data);
@@ -59,8 +70,8 @@ const Mapa = (props) => {
       minZoom={5}
       ref={map}
     >
-      <TileLayer url={baseUrlTileLayer} />
-      <TileLayer url={baseUrlState} />
+      <TileLayer url={BASELAYER} />
+      <TileLayer url={STATE_LAYER} />
 
       <FeatureGroup>
         <EditControl

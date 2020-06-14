@@ -34,6 +34,7 @@ const ModalCatalog = (props) => {
             <p>
               <a href={c.thumbnail} target="_blank" rel="noreferrer">
                 <FaExternalLinkAlt />
+                &nbsp;
                 {c.thumbnail}
               </a>
             </p>
