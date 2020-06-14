@@ -88,33 +88,31 @@ const WebGis = () => {
   };
 
   return (
-    <div style={{ height: '100%' }}>
-      <Header />
-      <div className="container">
-        <Grid style={{ height: '100%' }}>
-          <Grid.Column width={5} className="col">
-            <SideBar
-              onClickButton={getCatalog}
-              onReceiveGeoJSON={geoJSONFileToGeoJSON}
-            />
-          </Grid.Column>
-          <Grid.Column width={11} className="col">
-            <Map GetBBox={(data) => setCoords(data)} geoJSON={geoJSON} />
-          </Grid.Column>
-        </Grid>
-        <ModalError
-          isVisible={modalErrorVisible}
-          onClose={() => setModalErrorVisible(false)}
-          text={modalErrorText}
-        />
-        <ModalCatalog
-          isVisible={catalogVisible}
-          isLoading={catalogIsLoading}
-          catalog={catalogData}
-          SetPagination={handlePagination}
-          onClose={() => setCatalogVisible(false)}
-        />
-      </div>
+    <div className="container">
+      {/* <Header /> */}
+      <Grid style={{ height: '100%', margin: 0 }}>
+        <Grid.Column width={5} className="col">
+          <SideBar
+            onClickButton={getCatalog}
+            onReceiveGeoJSON={geoJSONFileToGeoJSON}
+          />
+        </Grid.Column>
+        <Grid.Column width={11} className="col">
+          <Map GetBBox={(data) => setCoords(data)} geoJSON={geoJSON} />
+        </Grid.Column>
+      </Grid>
+      <ModalError
+        isVisible={modalErrorVisible}
+        onClose={() => setModalErrorVisible(false)}
+        text={modalErrorText}
+      />
+      <ModalCatalog
+        isVisible={catalogVisible}
+        isLoading={catalogIsLoading}
+        catalog={catalogData}
+        SetPagination={handlePagination}
+        onClose={() => setCatalogVisible(false)}
+      />
     </div>
   );
 };

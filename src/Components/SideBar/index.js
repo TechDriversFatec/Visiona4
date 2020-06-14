@@ -34,13 +34,13 @@ const SideBar = (props) => {
       <CloudCoverage CloudChange={(e) => setCloud(e)} />
 
       <ModalGeoJSON
-        className="modal-geojson"
         onClose={(f) => {
           if (f) {
             onReceiveGeoJSON(f);
           }
         }}
       />
+
       <div className="button">
         <Button onClick={getSideBarData} appearance="primary">
           Verificar catálogo

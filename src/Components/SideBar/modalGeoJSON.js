@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'rsuite';
+import { Label } from 'semantic-ui-react';
+import { BsCloudUpload } from 'react-icons/bs';
 import Dropzone from '../Dropzone';
 
 const ModalGeoJSON = (props) => {
@@ -29,7 +31,27 @@ const ModalGeoJSON = (props) => {
   };
   return (
     <div className="upload">
-      <Button onClick={() => setModalState(true)}>Importar GeoJSON</Button>
+      <div style={{ marginBottom: 10 }}>
+        <Label className="title">
+          Área de interesse por upload de arquivo:
+        </Label>
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <BsCloudUpload size={25} style={{ marginRight: 10 }} />
+        <Button
+          color="blue"
+          appearance="ghost"
+          onClick={() => setModalState(true)}
+        >
+          Importar GeoJSON
+        </Button>
+      </div>
       <Modal show={modalState} onHide={closeAndRemoveFile}>
         <Modal.Header>
           <Modal.Title>Selecione um GeoJSON</Modal.Title>
@@ -49,6 +71,7 @@ const ModalGeoJSON = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
+      <div className="border" />
     </div>
   );
 };

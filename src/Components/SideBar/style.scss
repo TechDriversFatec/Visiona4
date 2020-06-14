@@ -3,6 +3,8 @@
   padding-left: 7px;
   padding-right: 7px;
   background-color: #eee9e9;
+  height: 100%;
+
   .title-container {
     align-items: center;
     display: flex;
@@ -74,6 +76,7 @@
       }
     }
   }
+
   .date {
     text-align: center;
 
@@ -97,13 +100,23 @@
   .button {
     align-items: center;
     display: flex;
-    padding-top: 40px;
     justify-content: center;
+    margin-top: 100px;
   }
 
   .upload {
     text-align: center;
-    margin-top: 20px;
-    display: block;
+    margin-top: 40px;
+
+    .title {
+      font-family: Roboto-Bold;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .border {
+      margin-top: 20px;
+      border-bottom: 1px solid #c7c5c5;
+    }
   }
 }
