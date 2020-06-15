@@ -6,6 +6,8 @@ import { BsCaretRightFill, BsCaretLeftFill } from 'react-icons/bs';
 
 import './style.scss';
 
+const BANDS_NAMES = ['B02', 'B03', 'B04', 'B08'];
+const { REACT_APP_API_URL } = process.env;
 const ModalCatalog = (props) => {
   const { SetPagination = () => {} } = props;
 
@@ -43,6 +45,20 @@ const ModalCatalog = (props) => {
                 {c.thumbnail}
               </a>
             </p>
+            <p>
+              <strong>Downloads</strong>
+            </p>
+            {BANDS_NAMES.map((band) => (
+              <p>
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href={`${REACT_APP_API_URL}api/v1/catalog/${c.collection}/${c.id}/${band}`}
+                >
+                  {`${REACT_APP_API_URL}api/v1/catalog/${c.collection}/${c.id}/${band}`}
+                </a>
+              </p>
+            ))}
           </Panel>
         ))}
       </PanelGroup>

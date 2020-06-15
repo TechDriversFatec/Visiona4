@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Grid } from 'semantic-ui-react';
 import { getCatalog as apiGetCatalog } from '../../api';
-import Header from '../../Components/Header';
 import SideBar from '../../Components/SideBar';
 import Map from '../../Components/Map';
 import ModalError from '../../Components/ModalError';
@@ -71,8 +70,6 @@ const WebGis = () => {
   };
 
   const handlePagination = async (page) => {
-    console.log('PAGE -->', page);
-
     setCatalogIsLoading(true);
     const { data: response } = await apiGetCatalog({ ...form, page });
     setCatalogData(response);
@@ -89,7 +86,6 @@ const WebGis = () => {
 
   return (
     <div className="container">
-      {/* <Header /> */}
       <Grid style={{ height: '100%', margin: 0 }}>
         <Grid.Column width={5} className="col">
           <SideBar
