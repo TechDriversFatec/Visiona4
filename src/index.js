@@ -1,22 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import 'semantic-ui-css/semantic.min.css';
-import './index.scss';
+import './index.css';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Router from './router';
-import { Store } from './store';
-import Base from './Components/Base';
 
 ReactDOM.render(
-  <Provider store={Store}>
-    <HashRouter basename={process.env.PUBLIC_URL}>
-      <Base>
-        <Router />
-      </Base>
-    </HashRouter>
-  </Provider>,
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
