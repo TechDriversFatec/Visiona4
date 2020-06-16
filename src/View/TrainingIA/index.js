@@ -8,7 +8,7 @@ import ModalError from '../../Components/ModalError';
 import ModalCatalog from '../../Components/ModalCatalog';
 import './style.scss';
 
-const WebGis = () => {
+const TrainingIA = () => {
   const [coords, setCoords] = useState();
   const [geoJSON, setGeoJSON] = useState();
   const [modalErrorVisible, setModalErrorVisible] = useState(false);
@@ -93,7 +93,7 @@ const WebGis = () => {
           <SideBar
             onClickButton={getCatalog}
             onReceiveGeoJSON={geoJSONFileToGeoJSON}
-            title="Configurações Catálogo"
+            title="Treinamento IA"
           />
         </FlexboxGrid.Item>
         <FlexboxGrid.Item colspan={18} className="col">
@@ -116,4 +116,4 @@ const WebGis = () => {
   );
 };
 
-export default WebGis;
+export default TrainingIA;
