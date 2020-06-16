@@ -1,9 +1,11 @@
 .container {
   height: 100% ;
   margin: 0 !important;
+  position: relative;
 
   .col {
     padding: 0 !important;
     margin: 0 !important;
+    height: 100%;
   }
 }

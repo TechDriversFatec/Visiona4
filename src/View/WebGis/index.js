@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid } from 'semantic-ui-react';
+import { FlexboxGrid } from 'rsuite';
 import { getCatalog as apiGetCatalog } from '../../api';
 import SideBar from '../../Components/SideBar';
 import Map from '../../Components/Map';
@@ -86,17 +86,17 @@ const WebGis = () => {
 
   return (
     <div className="container">
-      <Grid style={{ height: '100%', margin: 0 }}>
-        <Grid.Column width={5} className="col">
+      <FlexboxGrid style={{ height: '100%', margin: 0 }}>
+        <FlexboxGrid.Item colspan={6} className="col">
           <SideBar
             onClickButton={getCatalog}
             onReceiveGeoJSON={geoJSONFileToGeoJSON}
           />
-        </Grid.Column>
-        <Grid.Column width={11} className="col">
+        </FlexboxGrid.Item>
+        <FlexboxGrid.Item colspan={18} className="col">
           <Map GetBBox={(data) => setCoords(data)} geoJSON={geoJSON} />
-        </Grid.Column>
-      </Grid>
+        </FlexboxGrid.Item>
+      </FlexboxGrid>
       <ModalError
         isVisible={modalErrorVisible}
         onClose={() => setModalErrorVisible(false)}

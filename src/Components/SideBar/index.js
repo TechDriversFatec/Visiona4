@@ -4,9 +4,6 @@ import { Button, Sidenav, Nav } from 'rsuite';
 import ModalGeoJSON from './modalGeoJSON';
 import CloudCoverage from './cloudCoverage';
 import Date from './date';
-
-import 'semantic-ui-css/semantic.min.css';
-
 import './style.scss';
 
 const SideBar = (props) => {
