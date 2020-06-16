@@ -28,8 +28,8 @@ const CloudCoverage = (props) => {
           />
         </Col>
       </Row>
-      <Row className="col">
-        <Col>
+      <Row>
+        <Col className="col">
           <BsFillCloudFill size={30} />
           <span className="cloudValue">{value}%</span>
         </Col>

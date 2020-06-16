@@ -5,7 +5,7 @@ import './style.scss';
 
 const Header = () => {
   return (
-    <Nav appearance="tabs" justified style={{ height: '5vh' }}>
+    <Nav appearance="tabs" justified style={{ height: '50px' }}>
       <Nav.Item>
         <a href="/catalog" className="link">
           <div className="title">
