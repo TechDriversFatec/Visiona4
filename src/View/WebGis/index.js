@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Grid } from 'semantic-ui-react';
 import { getCatalog as apiGetCatalog } from '../../api';
+import Header from '../../Components/Header';
 import SideBar from '../../Components/SideBar';
 import Map from '../../Components/Map';
 import ModalError from '../../Components/ModalError';
@@ -86,11 +87,13 @@ const WebGis = () => {
 
   return (
     <div className="container">
+      <Header />
       <Grid style={{ height: '100%', margin: 0 }}>
         <Grid.Column width={5} className="col">
           <SideBar
             onClickButton={getCatalog}
             onReceiveGeoJSON={geoJSONFileToGeoJSON}
+            title="Configurações Catálogo"
           />
         </Grid.Column>
         <Grid.Column width={11} className="col">

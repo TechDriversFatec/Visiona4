@@ -18,6 +18,8 @@ const SideBar = (props) => {
     rangedate,
   };
 
+  const { title } = props;
+
   function getSideBarData() {
     onClickButton(data);
   }
@@ -27,7 +29,7 @@ const SideBar = (props) => {
       <Sidenav defaultOpenKeys={['3', '4']} style={{ height: '100%' }}>
         <Sidenav.Header className="nav-header">
           <DiAptana size={30} />
-          <span className="title">Configurações</span>
+          <span className="title">{title}</span>
         </Sidenav.Header>
         <Sidenav.Body className="nav-body">
           <Nav className="nav">
