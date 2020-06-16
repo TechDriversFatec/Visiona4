@@ -39,7 +39,7 @@ const ModalCatalog = (props) => {
               {new Date(c.datetime).toLocaleString()}
             </p>
             <p>
-              <a href={c.thumbnail} target="_blank" rel="noreferrer">
+              <a href={c.thumbnail} target="_blank" rel="noopener noreferrer">
                 <FaExternalLinkAlt />
                 &nbsp;
                 {c.thumbnail}
@@ -52,7 +52,7 @@ const ModalCatalog = (props) => {
               <p>
                 <a
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   href={`${REACT_APP_API_URL}api/v1/catalog/${c.collection}/${c.id}/${band}`}
                 >
                   {`${REACT_APP_API_URL}api/v1/catalog/${c.collection}/${c.id}/${band}`}

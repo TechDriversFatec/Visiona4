@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'rsuite';
-import { Label } from 'semantic-ui-react';
 import { BsCloudUpload } from 'react-icons/bs';
 import Dropzone from '../Dropzone';
 
