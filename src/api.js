@@ -18,3 +18,20 @@ export const getCatalog = async ({
 
   return response;
 };
+
+export const postCatalog = async ({
+  dateInit,
+  dateEnd,
+  cloudCover,
+  page = 1,
+  geojson,
+} = {}) => {
+  const response = await api.post('api/v1/catalog/geojson', {
+    dateInit,
+    dateEnd,
+    cloudCover,
+    page,
+    geojson,
+  });
+  return response;
+};

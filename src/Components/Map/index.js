@@ -30,7 +30,7 @@ const Mapa = (props) => {
   const map = useRef(null);
   const geoJSONRef = useRef();
 
-  const { GetBBox = () => {}, geoJSON } = props;
+  const { GetBBox = () => {}, geoJSON, onChangeGeoJSON = () => {} } = props;
 
   useEffect(() => {
     if (!map.current || !geoJSON || !geoJSONRef.current) return;
@@ -45,11 +45,20 @@ const Mapa = (props) => {
         .map((coord) => `${coord[0].toFixed(6)} ${coord[1].toFixed(6)}`)
         .join(', '),
     });
+    onChangeGeoJSON(geoJSON.features[0].geometry);
   }, [geoJSON]);
+
+  const latLngToGeoJSON = (coords) => {
+    return {
+      type: 'Polygon',
+      coordinates: [coords.map((coord) => [coord.lng, coord.lat])],
+    };
+  };
 
   const getLatlon = ({ latlng, bbox }) => {
     const [coords] = latlng;
     coords.push(coords[0]);
+    onChangeGeoJSON(latLngToGeoJSON(coords));
     const coordsWKT = coords
       .map((val) => `${val.lat.toFixed(6)} ${val.lng.toFixed(6)}`)
       .join(',');
