@@ -39,7 +39,6 @@ const WebGis = () => {
       cloudCoverage: cloudCover,
       rangedate: { startDate: dateInit, endDate: dateEnd },
     } = data;
-
     return {
       cloudCover,
       dateInit,

@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <Nav appearance="tabs" justified style={{ height: '50px' }}>
       <Nav.Item>
-        <a href="/catalog" className="link">
+        <a href="/" className="link">
           <div className="title">
             <FaClipboardList size={20} color="gray" />
             <span className="text">Catalogo</span>

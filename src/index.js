@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/catalog" exact component={Webgis} />
+      <Route path="/" exact component={Webgis} />
       <Route path="/training" exact component={Training} />
     </Switch>
   </BrowserRouter>,
