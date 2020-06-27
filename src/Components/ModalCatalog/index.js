@@ -27,7 +27,7 @@ const ModalCatalog = (props) => {
     isVisible = false,
     isLoading = false,
     catalog = {},
-    ListIds = () => {},
+    onSave = () => {},
   } = props;
 
   async function getIdSatellite(value) {
@@ -38,8 +38,12 @@ const ModalCatalog = (props) => {
   }
 
   function handleClose() {
-    ListIds(configSattelite);
     onClose();
+  }
+
+  function handleSave() {
+    handleClose();
+    onSave(configSattelite);
   }
 
   const catalogList = () =>
@@ -228,7 +232,7 @@ const ModalCatalog = (props) => {
         style={{ display: 'flex', justifyContent: 'space-between' }}
       >
         {Pagination()}
-        <Button onClick={handleClose} color="green">
+        <Button onClick={handleSave} color="green">
           Ok
         </Button>
       </Modal.Footer>

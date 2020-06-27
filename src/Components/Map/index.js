@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-underscore-dangle */
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Map, TileLayer, FeatureGroup, GeoJSON } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 
@@ -30,7 +30,6 @@ const normalizeBbox = (bbox) => {
 const Mapa = (props) => {
   const map = useRef(null);
   const geoJSONRef = useRef();
-  const [dragging, setDraggin] = useState(true);
   const { GetBBox = () => {}, geoJSON, onChangeGeoJSON = () => {} } = props;
 
   const latLngToGeoJSON = (coords) => {
@@ -53,11 +52,8 @@ const Mapa = (props) => {
       coordsWKT,
     };
 
-    setDraggin(false);
     GetBBox(data);
   };
-
-  const drag = dragging;
 
   useEffect(() => {
     if (!map.current || !geoJSON || !geoJSONRef.current) return;
@@ -78,7 +74,6 @@ const Mapa = (props) => {
   return (
     <Map
       style={{ height: '100%', width: '100%' }}
-      dragging={drag}
       zoom={11}
       center={[-23.607392, -46.560112]}
       maxZoom={17}
