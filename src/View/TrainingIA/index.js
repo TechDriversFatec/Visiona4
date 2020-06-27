@@ -13,10 +13,14 @@ const TrainingIA = () => {
   const [geoJSON, setGeoJSON] = useState();
   const [modalErrorVisible, setModalErrorVisible] = useState(false);
   const [modalErrorText, setModalErrorText] = useState('');
-  const [catalogVisible, setCatalogVisible] = useState(false);
+  const [catalogVisible, setCatalogVisible] = useState('');
+  const [ids, setIds] = useState('');
   const [catalogIsLoading, setCatalogIsLoading] = useState(false);
   const [catalogData, setCatalogData] = useState({});
   const [form, setForm] = useState({});
+
+  // variable that save satellites ids
+  console.log('ids -->', ids);
 
   const prepareFilter = (data) => {
     if (!polygon) {
@@ -103,6 +107,7 @@ const TrainingIA = () => {
         catalog={catalogData}
         SetPagination={handlePagination}
         onClose={() => setCatalogVisible(false)}
+        ListIds={(listIds) => setIds(listIds)}
       />
     </div>
   );

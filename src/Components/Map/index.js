@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable no-underscore-dangle */
 import React, { useRef, useEffect, useState } from 'react';
 import { Map, TileLayer, FeatureGroup, GeoJSON } from 'react-leaflet';
@@ -30,24 +31,7 @@ const Mapa = (props) => {
   const map = useRef(null);
   const geoJSONRef = useRef();
   const [dragging, setDraggin] = useState(true);
-
   const { GetBBox = () => {}, geoJSON, onChangeGeoJSON = () => {} } = props;
-
-  useEffect(() => {
-    if (!map.current || !geoJSON || !geoJSONRef.current) return;
-    const mapLeaflet = map.current.leafletElement;
-    const gJSON = geoJSONRef.current.leafletElement;
-
-    gJSON.addData(geoJSON);
-    mapLeaflet.fitBounds(gJSON.getBounds());
-    GetBBox({
-      bbox: normalizeBbox(gJSON.getBounds()),
-      coordsWKT: geoJSON.features[0].geometry.coordinates[0]
-        .map((coord) => `${coord[0].toFixed(6)} ${coord[1].toFixed(6)}`)
-        .join(', '),
-    });
-    onChangeGeoJSON(geoJSON.features[0].geometry);
-  }, [geoJSON]);
 
   const latLngToGeoJSON = (coords) => {
     return {
@@ -68,11 +52,28 @@ const Mapa = (props) => {
       bbox: normalizeBbox(bbox),
       coordsWKT,
     };
+
     setDraggin(false);
     GetBBox(data);
   };
 
   const drag = dragging;
+
+  useEffect(() => {
+    if (!map.current || !geoJSON || !geoJSONRef.current) return;
+    const mapLeaflet = map.current.leafletElement;
+    const gJSON = geoJSONRef.current.leafletElement;
+
+    gJSON.addData(geoJSON);
+    mapLeaflet.fitBounds(gJSON.getBounds());
+    GetBBox({
+      bbox: normalizeBbox(gJSON.getBounds()),
+      coordsWKT: geoJSON.features[0].geometry.coordinates[0]
+        .map((coord) => `${coord[0].toFixed(6)} ${coord[1].toFixed(6)}`)
+        .join(', '),
+    });
+    onChangeGeoJSON(geoJSON.features[0].geometry);
+  }, [geoJSON]);
 
   return (
     <Map
@@ -91,10 +92,9 @@ const Mapa = (props) => {
         <EditControl
           position="bottomright"
           onCreated={(e) => {
-            // eslint-disable-next-line no-underscore-dangle
+            // // eslint-disable-next-line no-underscore-dangle
             getLatlon({ latlng: e.layer._latlngs, bbox: e.layer._bounds });
           }}
-          onDeleted={() => setDraggin(true)}
           draw={{
             marker: false,
             circle: false,

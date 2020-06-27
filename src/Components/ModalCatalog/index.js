@@ -1,5 +1,14 @@
-import React from 'react';
-import { Modal, Button, Placeholder, PanelGroup, Panel, Tag } from 'rsuite';
+import React, { useState } from 'react';
+import {
+  Modal,
+  Button,
+  Placeholder,
+  PanelGroup,
+  Panel,
+  Tag,
+  FlexboxGrid,
+  Checkbox,
+} from 'rsuite';
 import { FaCloud, FaExternalLinkAlt } from 'react-icons/fa';
 import { MdDateRange } from 'react-icons/md';
 import { BsCaretRightFill, BsCaretLeftFill } from 'react-icons/bs';
@@ -8,15 +17,30 @@ import './style.scss';
 
 const BANDS_NAMES = ['B02', 'B03', 'B04', 'B08'];
 const { REACT_APP_API_URL } = process.env;
-const ModalCatalog = (props) => {
-  const { SetPagination = () => {} } = props;
 
+const ModalCatalog = (props) => {
+  const [configSattelite, setConfigSatellite] = useState();
+  const [ids] = useState([]);
+  const { SetPagination = () => {}, showConfig } = props;
   const {
     onClose = () => {},
     isVisible = false,
     isLoading = false,
     catalog = {},
+    ListIds = () => {},
   } = props;
+
+  async function getIdSatellite(value) {
+    const id = value.split(',');
+    ids.push(id);
+    const unique = [...new Set(ids)];
+    await setConfigSatellite(unique);
+  }
+
+  function handleClose() {
+    ListIds(configSattelite);
+    onClose();
+  }
 
   const catalogList = () =>
     catalog.list && (
@@ -60,6 +84,69 @@ const ModalCatalog = (props) => {
               </p>
             ))}
           </Panel>
+        ))}
+      </PanelGroup>
+    );
+
+  const Preview = () =>
+    catalog.list && (
+      <PanelGroup>
+        {catalog.list.map((c) => (
+          <FlexboxGrid style={{ height: '100%', margin: 0 }}>
+            <FlexboxGrid.Item colspan={20} className="col">
+              <Panel
+                header={
+                  <span>
+                    <p>
+                      Satélite: <span>{c.collection}</span>
+                    </p>
+                  </span>
+                }
+              >
+                <p>
+                  <span>
+                    <FaCloud />
+                    <span> Cobertura de nuvem: </span>
+                    {c.cloudCover}%
+                  </span>
+                </p>
+                <p>
+                  <span>
+                    <MdDateRange />
+                    <span> Imagem registrada dia: </span>
+                    {new Date(c.datetime).toLocaleString()}
+                  </span>
+                </p>
+                <p>
+                  <span>Link para visualizar: </span>
+                  <a
+                    href={c.thumbnail}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaExternalLinkAlt />
+                    {c.thumbnail}
+                  </a>
+                </p>
+              </Panel>
+            </FlexboxGrid.Item>
+            <FlexboxGrid.Item colspan={4} className="col">
+              <div
+                style={{
+                  height: '100%',
+                  minHeight: '150px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Checkbox
+                  onChange={(value) => getIdSatellite(value)}
+                  value={`${c.id}, ${c.collection}`}
+                />
+              </div>
+            </FlexboxGrid.Item>
+          </FlexboxGrid>
         ))}
       </PanelGroup>
     );
@@ -108,17 +195,40 @@ const ModalCatalog = (props) => {
     );
   }
 
+  function ShowCatalogOrPreview() {
+    if (showConfig) {
+      return catalogList();
+    }
+
+    return Preview();
+  }
+
   return (
     <Modal show={isVisible} onHide={onClose} className="modal-container">
-      <Modal.Header className="header">Catálogo de imagens</Modal.Header>
+      <Modal.Header className="header">
+        <p>
+          {showConfig
+            ? 'Catálogo de imagens'
+            : 'Lista de imagens dos Satélites'}
+        </p>
+      </Modal.Header>
       <Modal.Body>
-        {isLoading ? <Placeholder.Paragraph rows={5} /> : catalogList()}
+        <p>
+          {!showConfig
+            ? 'Selecione somente uma das imagens para ser enviado ao treinamento'
+            : null}
+        </p>
+        {isLoading ? (
+          <Placeholder.Paragraph rows={5} />
+        ) : (
+          ShowCatalogOrPreview()
+        )}
       </Modal.Body>
       <Modal.Footer
         style={{ display: 'flex', justifyContent: 'space-between' }}
       >
         {Pagination()}
-        <Button onClick={onClose} color="green">
+        <Button onClick={handleClose} color="green">
           Ok
         </Button>
       </Modal.Footer>
