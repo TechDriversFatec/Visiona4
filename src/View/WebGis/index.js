@@ -110,6 +110,7 @@ const WebGis = () => {
         catalog={catalogData}
         SetPagination={handlePagination}
         onClose={() => setCatalogVisible(false)}
+        showConfig
       />
     </div>
   );

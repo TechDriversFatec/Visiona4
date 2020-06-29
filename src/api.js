@@ -35,3 +35,13 @@ export const postCatalog = async ({
   });
   return response;
 };
+
+export const postIds = async ({ dateInit, dateEnd, cloudCover, ids } = {}) => {
+  const response = await api.post('api/v1/prepare-train', {
+    dateInit,
+    dateEnd,
+    cloudCover,
+    ids,
+  });
+  return response;
+};

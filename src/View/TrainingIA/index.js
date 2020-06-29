@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FlexboxGrid } from 'rsuite';
-import { postCatalog } from '../../api';
+import { postCatalog, postIds } from '../../api';
 import Header from '../../Components/Header';
 import SideBar from '../../Components/SideBar';
 import Map from '../../Components/Map';
@@ -13,10 +13,25 @@ const TrainingIA = () => {
   const [geoJSON, setGeoJSON] = useState();
   const [modalErrorVisible, setModalErrorVisible] = useState(false);
   const [modalErrorText, setModalErrorText] = useState('');
-  const [catalogVisible, setCatalogVisible] = useState(false);
+  const [catalogVisible, setCatalogVisible] = useState('');
   const [catalogIsLoading, setCatalogIsLoading] = useState(false);
   const [catalogData, setCatalogData] = useState({});
   const [form, setForm] = useState({});
+
+  const saveIds = async (ids) => {
+    const listIds = ids.map((id) => ({
+      id_scene: id[0],
+      satellite_name: id[1],
+    }));
+    const { cloudCover, dateInit, dateEnd } = form;
+    const { data: response } = await postIds({
+      cloudCover,
+      dateInit,
+      dateEnd,
+      listIds,
+    });
+    console.log(response);
+  };
 
   const prepareFilter = (data) => {
     if (!polygon) {
@@ -103,6 +118,7 @@ const TrainingIA = () => {
         catalog={catalogData}
         SetPagination={handlePagination}
         onClose={() => setCatalogVisible(false)}
+        onSave={saveIds}
       />
     </div>
   );
