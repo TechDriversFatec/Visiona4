@@ -1,13 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Training from './View/TrainingIA';
+import Webgis from './View/WebGis';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Switch>
+      <Route path="/" exact component={Webgis} />
+      <Route path="/training" exact component={Training} />
+    </Switch>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

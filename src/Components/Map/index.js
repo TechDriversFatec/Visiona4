@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable no-underscore-dangle */
 import React, { useRef, useEffect } from 'react';
 import { Map, TileLayer, FeatureGroup, GeoJSON } from 'react-leaflet';
@@ -29,8 +30,30 @@ const normalizeBbox = (bbox) => {
 const Mapa = (props) => {
   const map = useRef(null);
   const geoJSONRef = useRef();
+  const { GetBBox = () => {}, geoJSON, onChangeGeoJSON = () => {} } = props;
 
-  const { GetBBox = () => {}, geoJSON } = props;
+  const latLngToGeoJSON = (coords) => {
+    return {
+      type: 'Polygon',
+      coordinates: [coords.map((coord) => [coord.lng, coord.lat])],
+    };
+  };
+
+  const getLatlon = ({ latlng, bbox }) => {
+    const [coords] = latlng;
+    coords.push(coords[0]);
+    onChangeGeoJSON(latLngToGeoJSON(coords));
+    const coordsWKT = coords
+      .map((val) => `${val.lat.toFixed(6)} ${val.lng.toFixed(6)}`)
+      .join(',');
+
+    const data = {
+      bbox: normalizeBbox(bbox),
+      coordsWKT,
+    };
+
+    GetBBox(data);
+  };
 
   useEffect(() => {
     if (!map.current || !geoJSON || !geoJSONRef.current) return;
@@ -45,21 +68,8 @@ const Mapa = (props) => {
         .map((coord) => `${coord[0].toFixed(6)} ${coord[1].toFixed(6)}`)
         .join(', '),
     });
+    onChangeGeoJSON(geoJSON.features[0].geometry);
   }, [geoJSON]);
-
-  const getLatlon = ({ latlng, bbox }) => {
-    const [coords] = latlng;
-    coords.push(coords[0]);
-    const coordsWKT = coords
-      .map((val) => `${val.lat.toFixed(6)} ${val.lng.toFixed(6)}`)
-      .join(',');
-
-    const data = {
-      bbox: normalizeBbox(bbox),
-      coordsWKT,
-    };
-    GetBBox(data);
-  };
 
   return (
     <Map
@@ -77,7 +87,7 @@ const Mapa = (props) => {
         <EditControl
           position="bottomright"
           onCreated={(e) => {
-            // eslint-disable-next-line no-underscore-dangle
+            // // eslint-disable-next-line no-underscore-dangle
             getLatlon({ latlng: e.layer._latlngs, bbox: e.layer._bounds });
           }}
           draw={{

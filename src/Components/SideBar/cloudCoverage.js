@@ -1,40 +1,39 @@
 import React, { useState } from 'react';
-import { Grid } from 'semantic-ui-react';
-import { Slider } from 'react-semantic-ui-range';
+import { Grid, Row, Col, Slider } from 'rsuite';
 import { BsFillCloudFill } from 'react-icons/bs';
 
-import 'semantic-ui-css/semantic.min.css';
-
+import 'rsuite/dist/styles/rsuite-default.css';
 import './style.scss';
 
 const CloudCoverage = (props) => {
   const [value, setValue] = useState(50);
   const { CloudChange = () => {} } = props;
 
-  const settings = {
-    start: 50,
-    min: 0,
-    max: 100,
-    step: 1,
-
-    onChange: (e) => {
-      setValue(e);
-      CloudChange(e);
-    },
-  };
-
   return (
-    <Grid className="coverage-container">
+    <Grid fluid className="coverage-container">
       <div className="title-container">
         <span className="title">Cobertura de nuvem</span>
       </div>
-      <Grid.Column width={16}>
-        <Slider value={value} color="blue" settings={settings} />
-      </Grid.Column>
-      <Grid.Column className="col" width={16}>
-        <BsFillCloudFill size={30} />
-        <span className="cloudValue">{value}%</span>
-      </Grid.Column>
+      <Row>
+        <Col>
+          <Slider
+            progress
+            defaultValue={50}
+            color="blue"
+            step
+            onChange={(e) => {
+              setValue(e);
+              CloudChange(e);
+            }}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col className="col">
+          <BsFillCloudFill size={30} />
+          <span className="cloudValue">{value}%</span>
+        </Col>
+      </Row>
       <div className="border" />
     </Grid>
   );

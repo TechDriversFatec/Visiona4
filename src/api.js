@@ -18,3 +18,30 @@ export const getCatalog = async ({
 
   return response;
 };
+
+export const postCatalog = async ({
+  dateInit,
+  dateEnd,
+  cloudCover,
+  page = 1,
+  geojson,
+} = {}) => {
+  const response = await api.post('api/v1/catalog/geojson', {
+    dateInit,
+    dateEnd,
+    cloudCover,
+    page,
+    geojson,
+  });
+  return response;
+};
+
+export const postIds = async ({ dateInit, dateEnd, cloudCover, ids } = {}) => {
+  const response = await api.post('api/v1/prepare-train', {
+    dateInit,
+    dateEnd,
+    cloudCover,
+    ids,
+  });
+  return response;
+};

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FlexboxGrid } from 'rsuite';
-import { getCatalog as apiGetCatalog } from '../../api';
+import { postCatalog, postIds } from '../../api';
 import Header from '../../Components/Header';
 import SideBar from '../../Components/SideBar';
 import Map from '../../Components/Map';
@@ -8,42 +8,49 @@ import ModalError from '../../Components/ModalError';
 import ModalCatalog from '../../Components/ModalCatalog';
 import './style.scss';
 
-const WebGis = () => {
-  const [coords, setCoords] = useState();
+const TrainingIA = () => {
+  const [polygon, setPolygon] = useState();
   const [geoJSON, setGeoJSON] = useState();
   const [modalErrorVisible, setModalErrorVisible] = useState(false);
   const [modalErrorText, setModalErrorText] = useState('');
-  const [catalogVisible, setCatalogVisible] = useState(false);
+  const [catalogVisible, setCatalogVisible] = useState('');
   const [catalogIsLoading, setCatalogIsLoading] = useState(false);
   const [catalogData, setCatalogData] = useState({});
   const [form, setForm] = useState({});
 
-  const normalizeBbox = (bbox) => [
-    bbox.lngSW,
-    bbox.latSW,
-    bbox.lngNE,
-    bbox.latNE,
-  ];
+  const saveIds = async (ids) => {
+    const listIds = ids.map((id) => ({
+      id_scene: id[0],
+      satellite_name: id[1],
+    }));
+    const { cloudCover, dateInit, dateEnd } = form;
+    const { data: response } = await postIds({
+      cloudCover,
+      dateInit,
+      dateEnd,
+      listIds,
+    });
+    console.log(response);
+  };
 
   const prepareFilter = (data) => {
-    if (!coords) {
-      throw new Error('CoordsNotDefined');
+    if (!polygon) {
+      throw new Error('PolygonNotDefined');
     }
     if (!data.rangedate.startDate || !data.rangedate.endDate) {
       throw new Error('DateRangeNotDefined');
     }
 
-    const bbox = normalizeBbox(coords.bbox);
-
     const {
       cloudCoverage: cloudCover,
       rangedate: { startDate: dateInit, endDate: dateEnd },
     } = data;
+
     return {
       cloudCover,
       dateInit,
       dateEnd,
-      bbox,
+      geojson: polygon,
     };
   };
 
@@ -53,7 +60,8 @@ const WebGis = () => {
       setCatalogIsLoading(true);
       const filter = prepareFilter(data);
       setForm(filter);
-      const { data: response } = await apiGetCatalog(filter);
+      console.log(filter);
+      const { data: response } = await postCatalog(filter);
       setCatalogData(response);
       setCatalogIsLoading(false);
     } catch (error) {
@@ -71,7 +79,7 @@ const WebGis = () => {
 
   const handlePagination = async (page) => {
     setCatalogIsLoading(true);
-    const { data: response } = await apiGetCatalog({ ...form, page });
+    const { data: response } = await postCatalog({ ...form, page });
     setCatalogData(response);
     setCatalogIsLoading(false);
   };
@@ -92,11 +100,11 @@ const WebGis = () => {
           <SideBar
             onClickButton={getCatalog}
             onReceiveGeoJSON={geoJSONFileToGeoJSON}
-            title="Configurações Catálogo"
+            title="Treinamento IA"
           />
         </FlexboxGrid.Item>
         <FlexboxGrid.Item colspan={18} className="col">
-          <Map GetBBox={(data) => setCoords(data)} geoJSON={geoJSON} />
+          <Map geoJSON={geoJSON} onChangeGeoJSON={(data) => setPolygon(data)} />
         </FlexboxGrid.Item>
       </FlexboxGrid>
       <ModalError
@@ -110,10 +118,10 @@ const WebGis = () => {
         catalog={catalogData}
         SetPagination={handlePagination}
         onClose={() => setCatalogVisible(false)}
-        showConfig
+        onSave={saveIds}
       />
     </div>
   );
 };
 
-export default WebGis;
+export default TrainingIA;

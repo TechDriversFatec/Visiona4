@@ -4,9 +4,6 @@ import { Button, Sidenav, Nav } from 'rsuite';
 import ModalGeoJSON from './modalGeoJSON';
 import CloudCoverage from './cloudCoverage';
 import Date from './date';
-
-import 'semantic-ui-css/semantic.min.css';
-
 import './style.scss';
 
 const SideBar = (props) => {
@@ -18,6 +15,8 @@ const SideBar = (props) => {
     rangedate,
   };
 
+  const { title } = props;
+
   function getSideBarData() {
     onClickButton(data);
   }
@@ -27,7 +26,7 @@ const SideBar = (props) => {
       <Sidenav defaultOpenKeys={['3', '4']} style={{ height: '100%' }}>
         <Sidenav.Header className="nav-header">
           <DiAptana size={30} />
-          <span className="title">Configurações</span>
+          <span className="title">{title}</span>
         </Sidenav.Header>
         <Sidenav.Body className="nav-body">
           <Nav className="nav">
